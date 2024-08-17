@@ -17,7 +17,7 @@ object MainApp extends JFXApp {
   val roots = loader.getRoot[jfxs.layout.BorderPane]
   // initialize stage
   stage = new PrimaryStage {
-    title = "AddressApp"
+    title = "Plant the seed game"
     scene = new Scene {
       root = roots
     }
