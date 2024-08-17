@@ -1,0 +1,15 @@
+[debug] > Exec(run, None, None)
+[debug] Evaluating tasks: Compile / run
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 1 Scala source to C:\Users\jingh\OneDrive - Sunway Education Group\Documents\GitHub\finalprojectv2-SpicySourCream513\target\scala-2.12\classes ...
+[info] downloading https://repo1.maven.org/maven2/org/scala-sbt/util-interface/1.9.4/util-interface-1.9.4.pom
+[info] downloaded https://repo1.maven.org/maven2/org/scala-sbt/util-interface/1.9.4/util-interface-1.9.4.pom
+[info] downloading https://repo1.maven.org/maven2/org/scala-sbt/util-interface/1.9.4/util-interface-1.9.4.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-sbt/compiler-bridge_2.12/1.9.5/compiler-bridge_2.12-1.9.5-sources.jar
+[info] downloaded https://repo1.maven.org/maven2/org/scala-sbt/util-interface/1.9.4/util-interface-1.9.4.jar
+[info] downloaded https://repo1.maven.org/maven2/org/scala-sbt/compiler-bridge_2.12/1.9.5/compiler-bridge_2.12-1.9.5-sources.jar
+[info] Non-compiled module 'compiler-bridge_2.12' for Scala 2.12.18. Compiling...
+[info]   Compilation completed in 27.769s.
+[info] done compiling
+[success] Total time: 35 s, completed Aug 18, 2024 1:02:56 AM
+[debug] > Exec(idea-shell, None, None)

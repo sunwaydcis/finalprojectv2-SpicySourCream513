@@ -1,0 +1,10 @@
+[debug] Created transactional ClassFileManager with tempDir = C:\Users\jingh\OneDrive - Sunway Education Group\Documents\GitHub\finalprojectv2-SpicySourCream513\target\scala-2.12\classes.bak
+[debug] About to delete class files:
+[debug] We backup class files:
+[debug] Created transactional ClassFileManager with tempDir = C:\Users\jingh\OneDrive - Sunway Education Group\Documents\GitHub\finalprojectv2-SpicySourCream513\target\scala-2.12\classes.bak
+[debug] About to delete class files:
+[debug] We backup class files:
+[debug] Registering generated classes:
+[debug] 	MyApp.class
+[debug] 	MyApp$.class
+[debug] Removing the temporary directory used for backing up class files: C:\Users\jingh\OneDrive - Sunway Education Group\Documents\GitHub\finalprojectv2-SpicySourCream513\target\scala-2.12\classes.bak
