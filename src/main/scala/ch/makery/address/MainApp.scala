@@ -1,10 +1,10 @@
 package ch.makery.address
+import javafx.{scene => jfxs}
+import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
-import scalafx.Includes._
-import scalafxml.core.{NoDependencyResolver, FXMLView, FXMLLoader}
-import javafx.{scene => jfxs}
+import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 
 object MainApp extends JFXApp {
   // transform path of RootLayout.fxml to URI for resource location.
@@ -30,7 +30,15 @@ object MainApp extends JFXApp {
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(roots)
   }
-  // call to display PersonOverview when app start
-  showGardenOverview()
+
+  def showWelcome() = {
+    val resource = getClass.getResource("view/Welcome.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load();
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+    this.roots.setCenter(roots)
+  }
+
+  showWelcome()
 }
 
