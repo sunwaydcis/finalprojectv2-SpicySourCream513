@@ -1,6 +1,6 @@
-package ch.makery.address.view
+package ch.makery.farming.view
 import scalafxml.core.macros.sfxml
-import ch.makery.address.MainApp
+import ch.makery.farming.MainApp
 
 
 @sfxml

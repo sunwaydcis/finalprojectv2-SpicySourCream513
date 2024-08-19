@@ -1,10 +1,10 @@
-package ch.makery.address.model.crops
+package ch.makery.farming.model.crops
 
-class Wheat extends Crop(name = "Wheat",
-  growthTimeInSeconds = 5,  // 5 seconds
+class Carrot extends Crop(name = "Carrot",
+  growthTimeInSeconds = 70,  // 1 minute and 10 seconds
   health = 100,
-  cost = 12,
-  sellPrice = 30) {
+  cost = 5,
+  sellPrice = 15) {
 
   override def grow(): Unit = {
     super.grow()

@@ -1,4 +1,4 @@
-package ch.makery.address.model.crops
+package ch.makery.farming.model.crops
 
 abstract class Crop(val name: String,
                     val growthTimeInSeconds: Int,

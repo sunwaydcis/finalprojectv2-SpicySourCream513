@@ -1,4 +1,4 @@
-package ch.makery.address.model
+package ch.makery.farming.model
 
 class PlayerStats(var coins: Int, var totalHarvestedPlants: Int) {
 

@@ -1,4 +1,4 @@
-package ch.makery.address
+package ch.makery.farming
 
 import javafx.{scene => jfxs}
 import scalafx.Includes._
@@ -79,17 +79,18 @@ object MainApp extends JFXApp {
     stage.showAndWait()
   }
 
-  private def showPlantCrop(plotIndex: Int): Unit = {
+  def showPlantCrop(plotIndex: Int): Unit = {
     val resource = getClass.getResource("view/PlantCrop.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load()
     val root = loader.getRoot[jfxs.layout.AnchorPane]
     val stage = new Stage(StageStyle.DECORATED)
-    stage.setTitle("Plant a Crop")
+    stage.setTitle(s"Plant a Crop - Plot $plotIndex")
     stage.setScene(new jfxs.Scene(root))
     stage.showAndWait()
-  }
 
-    showWelcome()
   }
+  showWelcome()
+
+}
 

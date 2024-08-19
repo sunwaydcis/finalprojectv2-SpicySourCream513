@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="318.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.farming.view.PlantCropController">
+   <children>
+      <Label layoutX="172.0" layoutY="44.0" text="Select Plant to harvest">
+         <font>
+            <Font name="Franklin Gothic Heavy" size="27.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cropComboBox" layoutX="77.0" layoutY="92.0" prefHeight="25.0" prefWidth="465.0" />
+      <Label fx:id="seedsLabel" layoutX="224.0" layoutY="134.0" text="You have 5 seeds for this plant" />
+      <Label fx:id="descriptionLabel" layoutX="251.0" layoutY="166.0" text="Plant description" />
+      <Button fx:id="plantbutton" layoutX="230.0" layoutY="238.0" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" />
+      <Button fx:id="removeplantbutton" layoutX="317.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleRemovePlantClick" text="Remove Plant" />
+   </children>
+</AnchorPane>

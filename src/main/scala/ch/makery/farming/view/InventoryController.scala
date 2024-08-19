@@ -1,4 +1,4 @@
-package ch.makery.address.view
+package ch.makery.farming.view
 
 import scalafxml.core.macros.sfxml
 
