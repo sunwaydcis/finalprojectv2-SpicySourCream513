@@ -10,42 +10,30 @@ import javafx.stage.{Stage, StageStyle}
 import javafx.scene.Scene
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
-import scalafxml.core.{FXMLLoader, NoDependencyResolver}
+
 
 @sfxml
-class GardenOverviewController(private var gardenGrid: GridPane = _,
-                               private var coinsLabel: Label = _,
-                               private var harvestedPlantsLabel: Label = _,
-                               private var shopButton: Button = _,
-                               private var inventoryButton: Button = _,
-                              ){
+class GardenOverviewController(private var gardenGrid: GridPane,
+                               private var coinsLabel: Label,
+                               private var harvestedPlantsLabel: Label,
+                               private var shopButton: Button,
+                               private var inventoryButton: Button){
 
-  def getHome(): Unit = {
-    MainApp.showWelcome()
-  }
 
-  def initializa(): Unit = {
+  def initialize(): Unit = {
     updateUI;
   }
-  def handleReturnHome():Unit = {
+  def returnHome(): Unit = {
     MainApp.showWelcome()
+  }
 
-
-    def handleShopClick(): Unit = {
-      openWindow("shop.fxml", "Shop")
+    def getShop(): Unit = {
+      openWindow("view/shop.fxml", "Shop")
     }
 
     @FXML
-    def handleInventoryClick(): Unit = {
-      openWindow("inventory.fxml", "Inventory")
-    }
-
-    @FXML
-    def handleReturnHomeClick(): Unit = {
-      val loader = new FXMLLoader(getClass.getResource("Welcome.fxml"))
-      val root = loader.load[Parent]()
-      val stage = returnHomeButton.getScene.getWindow.asInstanceOf[Stage]
-      stage.setScene(new Scene(root))
+    def getInventory(): Unit = {
+      openWindow("view/inventory.fxml", "Inventory")
     }
 
     private def openWindow(fxmlFile: String, title: String): Unit = {
@@ -72,7 +60,5 @@ class GardenOverviewController(private var gardenGrid: GridPane = _,
       0
     }
   }
-
-}
 
 

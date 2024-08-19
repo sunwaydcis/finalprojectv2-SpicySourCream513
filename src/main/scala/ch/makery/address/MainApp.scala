@@ -17,11 +17,12 @@ object MainApp extends JFXApp {
   val roots = loader.getRoot[jfxs.layout.BorderPane]
   // initialize stage
   stage = new PrimaryStage {
-    title = "Plant the seed game"
+    title = "Farming Game"
     scene = new Scene {
       root = roots
     }
   }
+
   // actions for display person overview window
   def showGardenOverview() = {
     val resource = getClass.getResource("view/GardenOverview.fxml")

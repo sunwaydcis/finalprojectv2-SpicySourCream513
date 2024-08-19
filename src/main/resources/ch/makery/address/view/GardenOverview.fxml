@@ -23,7 +23,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Button fx:id="returnHomeButton" layoutX="43.0" layoutY="438.0" mnemonicParsing="false" onAction="#getHome" text="Return Home" />
+      <Button layoutX="43.0" layoutY="438.0" mnemonicParsing="false" onAction="#returnHome" text="Return Home" />
       <Button fx:id="shopButton" layoutX="697.0" layoutY="369.0" mnemonicParsing="false" onAction="#getShop" text="Shop" />
       <Button fx:id="inventoryButton" layoutX="686.0" layoutY="413.0" mnemonicParsing="false" onAction="#getInventory" text="Inventory" />
       <Label fx:id="coinsLabel" layoutX="50.0" layoutY="50.0" text="Coin" />
