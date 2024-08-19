@@ -1,9 +1,11 @@
 package ch.makery.address
+
 import javafx.{scene => jfxs}
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
+import scalafx.stage.{Stage, StageStyle}
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 
 object MainApp extends JFXApp {
@@ -38,6 +40,29 @@ object MainApp extends JFXApp {
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(roots)
+  }
+
+  // Show Shop in a New Window
+  def showShop() = {
+    val resource = getClass.getResource("view/Shop.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val root = loader.getRoot[jfxs.layout.AnchorPane]
+    val stage = new Stage(StageStyle.DECORATED)
+    stage.setTitle("Shop")
+    stage.setScene(new Scene(root))
+    stage.showAndWait()
+  }
+
+  def showInventory() = {
+    val resource = getClass.getResource("view/Inventory.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val root = loader.getRoot[jfxs.layout.AnchorPane]
+    val stage = new Stage(StageStyle.DECORATED)
+    stage.setTitle("Inventory")
+    stage.setScene(new Scene(root))
+    stage.showAndWait()
   }
 
   showWelcome()

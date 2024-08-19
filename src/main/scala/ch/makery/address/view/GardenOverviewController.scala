@@ -1,23 +1,18 @@
 package ch.makery.address.view
 
 import ch.makery.address.MainApp
-import ch.makery.address.MainApp.getClass
 import scalafxml.core.macros.sfxml
 import javafx.scene.control.{Button, Label}
-import javafx.fxml.FXML
+import javafx.fxml.FXMLLoader
 import javafx.scene.layout.GridPane
 import javafx.stage.{Stage, StageStyle}
-import javafx.scene.Scene
-import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
-
+import javafx.{scene => jfxs}
 
 @sfxml
 class GardenOverviewController(private var gardenGrid: GridPane,
                                private var coinsLabel: Label,
-                               private var harvestedPlantsLabel: Label,
-                               private var shopButton: Button,
-                               private var inventoryButton: Button){
+                               private var harvestedPlantsLabel: Label
+                              ){
 
 
   def initialize(): Unit = {
@@ -26,39 +21,45 @@ class GardenOverviewController(private var gardenGrid: GridPane,
   def returnHome(): Unit = {
     MainApp.showWelcome()
   }
-
-    def getShop(): Unit = {
-      openWindow("view/shop.fxml", "Shop")
-    }
-
-    @FXML
-    def getInventory(): Unit = {
-      openWindow("view/inventory.fxml", "Inventory")
-    }
-
-    private def openWindow(fxmlFile: String, title: String): Unit = {
-      val loader = new FXMLLoader(getClass.getResource(fxmlFile))
-      val root = loader.load[Parent]()
-      val stage = new Stage(StageStyle.DECORATED)
-      stage.setTitle(title)
-      stage.setScene(new Scene(root))
-      stage.show()
-    }
-
-    def updateUI(): Unit = {
-      // Here you can set the text of coinsLabel and harvestedPlantsLabel
-      // from a shared game state or model
-      coinsLabel.setText("Coins: " + getCoins())
-      harvestedPlantsLabel.setText("Total Harvested Plants: " + getTotalHarvestedPlants())
-    }
-
-    private def getCoins(): Int = {
-      100
-    }
-
-    private def getTotalHarvestedPlants(): Int = {
-      0
-    }
+/*
+  def getShop(): Unit = {
+    showPopUp("view/Shop.fxml", "Shop")
   }
 
+  def getInventory(): Unit = {
+    showPopUp("view/Inventory.fxml", "Inventory")
+  }
 
+  private def showPopUp(fxmlFile: String, title: String): Unit = {
+    val resource = getClass.getResource(fxmlFile)
+    val loader = new FXMLLoader(resource)
+    loader.load();
+    val root = loader.getRoot[jfxs.layout.AnchorPane]()
+    val stage = new Stage(StageStyle.DECORATED)
+    stage.setTitle(title)
+    stage.setScene(new jfxs.Scene(root))
+    stage.showAndWait()
+  }
+*/
+  def getShop(): Unit = {
+    MainApp.showShop()
+  }
+  def getInventory(): Unit = {
+    MainApp.showInventory()
+  }
+
+  def updateUI(): Unit = {
+    // Here you can set the text of coinsLabel and harvestedPlantsLabel
+    // from a shared game state or model
+    coinsLabel.setText("Coins: " + getCoins())
+    harvestedPlantsLabel.setText("Total Harvested Plants: " + getTotalHarvestedPlants())
+  }
+
+  private def getCoins(): Int = {
+    100
+  }
+
+  private def getTotalHarvestedPlants(): Int = {
+    0
+  }
+}
