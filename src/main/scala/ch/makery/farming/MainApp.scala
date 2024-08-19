@@ -81,16 +81,15 @@ object MainApp extends JFXApp {
 
   def showPlantCrop(plotIndex: Int): Unit = {
     val resource = getClass.getResource("view/PlantCrop.fxml")
-    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    val loader = new FXMLLoader(resource, NoDependencyResolver) // NoDependencyResolver is fine here
     loader.load()
     val root = loader.getRoot[jfxs.layout.AnchorPane]
     val stage = new Stage(StageStyle.DECORATED)
     stage.setTitle(s"Plant a Crop - Plot $plotIndex")
     stage.setScene(new jfxs.Scene(root))
     stage.showAndWait()
-
   }
-  showWelcome()
 
+  showWelcome()
 }
 

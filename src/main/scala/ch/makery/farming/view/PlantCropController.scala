@@ -6,38 +6,29 @@ import javafx.scene.control.{Button, ComboBox, Label}
 import scalafx.Includes._
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.control.Alert
+import scalafxml.core.macros.sfxml
 
-case class Crop(name: String, seedsAvailable: Int, description: String)
+@sfxml
+class PlantCropController(private val crops: List[Crop] = Crop.defaultCrops(),
+                          @FXML private var cropComboBox: ComboBox[String],
+                          @FXML private var seedsLabel: Label,
+                          @FXML private var descriptionLabel: Label,
+                          @FXML private var plantButton: Button,
+                          @FXML private var removePlantButton: Button) {
 
-class PlantCropController {
+  // To track whether the grid cell is occupied
+  private var isGridCellOccupied: Boolean = false
+  private var currentPlantedCrop: Option[Crop] = None
 
-  // Sample data, you would replace this with your actual data source
-  private val crops: List[Crop] = List(
-    Crop("Tomato", 5, "A juicy red fruit, good for salads."),
-    Crop("Carrot", 10, "A root vegetable, usually orange."),
-    Crop("Wheat", 20, "A cereal grain used for bread."),
-    Crop("Corn", 8, "A yellow vegetable used in many dishes.")
-  )
-
-  // JavaFX controls linked to the FXML file
-  @FXML private var cropComboBox: ComboBox[String] = _
-  @FXML private var seedsLabel: Label = _
-  @FXML private var descriptionLabel: Label = _
-  @FXML private var plantButton: Button = _
-  @FXML private var removePlantButton: Button = _
-
-  // This method is automatically called after the FXML file is loaded
   @FXML
   def initialize(): Unit = {
-    // Convert crop names to an ObservableList and set it to the ComboBox
     val cropNames: ObservableList[String] = FXCollections.observableArrayList(crops.map(_.name): _*)
     cropComboBox.setItems(cropNames)
-
-    // Add listener to ComboBox to update UI when a new crop is selected
+    cropComboBox.getSelectionModel.selectFirst() // Automatically select the first crop in the list
+    updateCropDetails()
     cropComboBox.setOnAction(_ => updateCropDetails())
   }
 
-  // Updates the seed count and description based on the selected crop
   private def updateCropDetails(): Unit = {
     val selectedCropName = cropComboBox.getValue
     crops.find(_.name == selectedCropName) match {
@@ -50,18 +41,28 @@ class PlantCropController {
     }
   }
 
-  // Handle the plant button click
-  @FXML
   def handlePlantClick(): Unit = {
+    if (isGridCellOccupied) {
+      new Alert(AlertType.Warning) {
+        initOwner(plantButton.getScene.getWindow)
+        title = "Error"
+        headerText = None
+        contentText = s"The cell is already occupied by ${currentPlantedCrop.get.name}!"
+      }.showAndWait()
+      return
+    }
+
     val selectedCropName = cropComboBox.getValue
     crops.find(_.name == selectedCropName) match {
       case Some(crop) if crop.seedsAvailable > 0 =>
-        // Logic to plant the crop, e.g., reduce the seed count, update the grid, etc.
+        isGridCellOccupied = true
+        currentPlantedCrop = Some(crop)
+        // Logic to mark the grid cell as occupied with this crop
         new Alert(AlertType.Information) {
           initOwner(plantButton.getScene.getWindow)
           title = "Planting"
           headerText = None
-          contentText = s"Successfully planted $selectedCropName!"
+          contentText = s"Successfully planted $selectedCropName! The cell is now occupied by $selectedCropName."
         }.showAndWait()
       case Some(_) =>
         new Alert(AlertType.Warning) {
@@ -79,14 +80,35 @@ class PlantCropController {
     }
   }
 
-  // Handle the remove plant button click
-  @FXML
   def handleRemovePlantClick(): Unit = {
-    // Logic to remove the crop, e.g., clear the plot in the grid
+    if (!isGridCellOccupied) {
+      new Alert(AlertType.Warning) {
+        initOwner(removePlantButton.getScene.getWindow)
+        title = "Error"
+        headerText = None
+        contentText = "The cell is already empty!"
+      }.showAndWait()
+      return
+    }
+
+    isGridCellOccupied = false
+    currentPlantedCrop = None
     new Alert(AlertType.Information) {
       initOwner(removePlantButton.getScene.getWindow)
       title = "Removing"
-      contentText = "Successfully removed the plant!"
+      headerText = None
+      contentText = "Successfully removed the plant! The cell is now empty."
     }.showAndWait()
   }
+}
+
+case class Crop(name: String, seedsAvailable: Int, description: String)
+
+object Crop {
+  def defaultCrops(): List[Crop] = List(
+    Crop("Tomato", 5, "A juicy red fruit, good for salads."),
+    Crop("Carrot", 10, "A root vegetable, usually orange."),
+    Crop("Wheat", 20, "A cereal grain used for bread."),
+    Crop("Corn", 8, "A yellow vegetable used in many dishes.")
+  )
 }
