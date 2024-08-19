@@ -18,12 +18,6 @@ abstract class Crop(val name: String,
   def showDescription(): String = {
     s"The $name takes $growthTime to grow. It costs $cost coins to plant and can be sold for $sellPrice coins when mature."
   }
-    // Method to simulate watering the crop
-    def water(): Unit = {
-      health += 10
-      if (health > 100) health = 100
-      println(s"$name has been watered. Health is now $health.")
-    }
 
     // Method to simulate growing the crop over time
     def grow(): Unit = {
