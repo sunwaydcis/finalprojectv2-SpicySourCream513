@@ -42,6 +42,20 @@ object MainApp extends JFXApp {
     this.roots.setCenter(roots)
   }
 
+  def showInstruction() = {
+    val resource = getClass.getResource("view/Instruction.fxml")
+    if (resource == null) {
+      throw new RuntimeException("Instruction.fxml not found")
+    }
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val root = loader.getRoot[jfxs.layout.AnchorPane]
+    val stage = new Stage(StageStyle.DECORATED)
+    stage.setTitle("Instruction")
+    stage.setScene(new Scene(root))
+    stage.showAndWait()
+  }
+
   // Show Shop in a New Window
   def showShop() = {
     val resource = getClass.getResource("view/Shop.fxml")

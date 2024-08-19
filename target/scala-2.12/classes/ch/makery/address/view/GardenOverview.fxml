@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.GardenOverviewController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.GardenOverviewController">
    <children>
       <GridPane fx:id="gardenGrid" alignment="CENTER" gridLinesVisible="true" layoutX="135.0" layoutY="127.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="50.0">
         <columnConstraints>
@@ -22,6 +22,9 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <Button fx:id="Grid00" mnemonicParsing="false" text="Button" />
+         </children>
       </GridPane>
       <Button layoutX="43.0" layoutY="438.0" mnemonicParsing="false" onAction="#returnHome" text="Return Home" />
       <Button layoutX="697.0" layoutY="369.0" mnemonicParsing="false" onAction="#getShop" text="Shop" />
