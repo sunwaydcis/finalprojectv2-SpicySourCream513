@@ -1,5 +1,6 @@
 package ch.makery.farming
 
+import ch.makery.farming.view.GardenOverviewController
 import javafx.{scene => jfxs}
 import scalafx.Includes._
 import scalafx.application.JFXApp

@@ -1,9 +1,7 @@
-package ch.makery.farming.model
+package ch.makery.farming.model.items
 
-class PlayerState(var coins: Int, //Initial coins
-                  var totalHarvestedPlants: Int) {
-
-
+class PlayerState(var coins: Int = 100,
+                  var totalHarvestedPlants: Int = 0) {
 
   // Method to deduct coins, e.g., when removing a crop
   def deductCoins(amount: Int): Boolean = {
@@ -25,4 +23,11 @@ class PlayerState(var coins: Int, //Initial coins
     totalHarvestedPlants += count
   }
 
+  def getCoins(): Int = {
+    coins
+  }
+
+  def getTotalHarvestedPlants(): Int = {
+    totalHarvestedPlants
+  }
 }

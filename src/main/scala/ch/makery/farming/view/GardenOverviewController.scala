@@ -1,26 +1,30 @@
 package ch.makery.farming.view
 
 import ch.makery.farming.MainApp
-import scalafxml.core.macros.sfxml
-import javafx.scene.control.{Button, Label, Alert}
+import ch.makery.farming.model.items.PlayerState
+import javafx.fxml.{FXML, Initializable}
+import javafx.scene.control.{Alert, Button, Label}
 import javafx.scene.layout.GridPane
 import scalafx.scene.control.Alert.AlertType
 import javafx.event.ActionEvent
+import scalafxml.core.macros.sfxml
 
 @sfxml
-class GardenOverviewController(private val gardenGrid: GridPane,
-                               private val coinsLabel: Label,
-                               private val harvestedPlantsLabel: Label) {
+class GardenOverviewController(
 
-  // An array to track whether each plot is occupied or planted
-  private val plotStatus: Array[Option[String]] = Array.fill(9)(None) // Assuming a 3x3 grid
+                                @FXML private var gardenGrid: GridPane,
+                                @FXML private var coinsLabel: Label,
+                                @FXML private var totalharvestplantLabel: Label ) {
 
+  private val plotStatus: Array[Option[String]] = Array.fill(9)(None)
+  private val playerState = new PlayerState()
+
+  @FXML
   def initialize(): Unit = {
-    // Bind the buttons in the grid to the handlePlantClick function
     for (i <- 0 until 9) {
       val button = new Button()
-      button.setOnAction(_ => handlePlantClick(new ActionEvent(button, button))) // Correctly handle the ActionEvent
-      gardenGrid.add(button, i % 3, i / 3) // Adding button to the grid
+      button.setOnAction(_ => handlePlantClick(new ActionEvent(button, button)))
+      gardenGrid.add(button, i % 3, i / 3)
     }
     updateUI()
   }
@@ -38,15 +42,10 @@ class GardenOverviewController(private val gardenGrid: GridPane,
   }
 
   def updateUI(): Unit = {
-    coinsLabel.setText("Coins: " + getCoins())
-    harvestedPlantsLabel.setText("Total Harvested Plants: " + getTotalHarvestedPlants())
+    coinsLabel.setText("Coins: " + playerState.getCoins())
+    totalharvestplantLabel.setText("Total Harvested Plants: " + playerState.getTotalHarvestedPlants())
   }
 
-  private def getCoins(): Int = { 100 }
-
-  private def getTotalHarvestedPlants(): Int = { 0 }
-
-  // Method to handle when a plot is clicked
   def handlePlantClick(event: ActionEvent): Unit = {
     val button = event.getSource.asInstanceOf[Button]
     val plotIndex = gardenGrid.getChildren.indexOf(button)
@@ -54,13 +53,13 @@ class GardenOverviewController(private val gardenGrid: GridPane,
       case None =>
         MainApp.showPlantCrop(plotIndex)
         plotStatus(plotIndex) = Some("Planted")
+        playerState.addHarvestedPlants(1)
         updateUI()
       case Some(_) =>
         showOccupiedMessage()
     }
   }
 
-  // Show an alert if the plot is occupied
   private def showOccupiedMessage(): Unit = {
     val alert = new Alert(AlertType.Information)
     alert.setTitle("Plot Occupied")
