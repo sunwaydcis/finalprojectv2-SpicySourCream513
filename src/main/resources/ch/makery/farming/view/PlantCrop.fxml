@@ -17,6 +17,6 @@
       <Label fx:id="descriptionLabel" layoutX="251.0" layoutY="166.0" text="Plant description" />
       <Button fx:id="plantButton" layoutX="230.0" layoutY="238.0" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" />
       <Button fx:id="removePlantButton" layoutX="317.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleRemovePlantClick" text="Remove Plant" />
-      <ChoiceBox layoutX="80.0" layoutY="97.0" prefHeight="25.0" prefWidth="470.0" />
+      <ChoiceBox fx:id="cropChoiceBox" layoutX="80.0" layoutY="97.0" prefHeight="25.0" prefWidth="470.0" />
    </children>
 </AnchorPane>
