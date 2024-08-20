@@ -77,19 +77,22 @@ class PlantCropController(
   @FXML
   def handleRemovePlantClick(event: ActionEvent): Unit = {
     val plotIndex = getPlotIndex(event) // Get the plot index based on the event
-    if (plotStatus(plotIndex) && currentPlantedCrop.isDefined) {
-      val crop = currentPlantedCrop.get
-      val removeResult = crop.removeCrop(100) // Assuming player always has enough coins
-      plotStatus(plotIndex) = false  // Mark plot as unoccupied
-      currentPlantedCrop = None
-      showAlert(removeResult._1 match {
-        case true => AlertType.Information
-        case false => AlertType.Warning
-      }, "Removing", Some(removeResult._2), "The plant has been removed.")
+
+    // Ensure plotStatus is not null and plotIndex is valid
+    if (plotStatus != null && plotIndex >= 0 && plotIndex < plotStatus.length) {
+      if (plotStatus(plotIndex)) { // If the plot is occupied
+        plotStatus(plotIndex) = false  // Mark plot as unoccupied
+        currentPlantedCrop = None      // Remove the planted crop
+        showAlert(AlertType.Information, "Removing", Some("Plant removed successfully!"), "The plot is now empty.")
+      } else {
+        showAlert(AlertType.Warning, "Error", Some("The cell is already empty!"), "No plant to remove.")
+      }
     } else {
-      showAlert(AlertType.Warning, "Error", Some("The cell is already empty or no plant selected!"), "No plant to remove.")
+      // Handle the case where plotStatus is null or plotIndex is invalid
+      showAlert(AlertType.Error, "Error", Some("Invalid plot status or index!"), "Please try again.")
     }
   }
+
 
   private def showAlert(alertType: AlertType, title: String, header: Option[String], content: String): Unit = {
     val alert = new Alert(alertType)
