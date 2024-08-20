@@ -1,20 +1,13 @@
 package ch.makery.farming.model.crops
 
-class Wheat extends Crop(name = "Wheat",
-  growthTimeInSeconds = 5,  // 5 seconds
-  health = 100,
-  cost = 12,
-  sellPrice = 30) {
+class Wheat(
+              _growthTimeInSeconds: Int = 70,
+              cost: Double = 9.0,
+              sellPrice: Double = 15.0,
+              seedsAvailable: Int = 20
+            ) extends Crop("Wheat", _growthTimeInSeconds, cost, sellPrice, seedsAvailable, false) {
 
-  override def grow(): Unit = {
-    super.grow()
-  }
-
-  override def harvest(): Option[Int] = {
-    super.harvest()
-  }
-
-  override def removeCrop(playerCoins: Int): (Boolean, Int) = {
-    super.removeCrop(playerCoins)
+  override def getDescription: String = {
+    super.getDescription + " This is wheat."
   }
 }
