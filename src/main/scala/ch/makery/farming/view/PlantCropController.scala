@@ -3,6 +3,7 @@ package ch.makery.farming.view
 import ch.makery.farming.model.crops.{Carrot, Crop, Wheat}
 import javafx.fxml.FXML
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
+import ch.makery.farming.view.GardenOverviewController
 
 import javafx.scene.control.{Button, Label, MenuButton, MenuItem}
 import scalafx.scene.control.Alert
@@ -57,10 +58,6 @@ class PlantCropController(
   }
 
   def updateUIAfterPlanting(): Unit = {
-    cropMenuButton.setText("Select a Crop")
-    seedsLabel.setText("")
-    descriptionLabel.setText("Select a crop to see details.")
-    currentPlantedCrop = None
   }
 
   def handleRemovePlantClick(): Unit = {

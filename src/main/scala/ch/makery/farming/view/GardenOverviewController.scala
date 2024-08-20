@@ -16,7 +16,7 @@ class GardenOverviewController(
                                 @FXML private var totalharvestplantLabel: Label ) {
 
   private val playerState = new PlayerState()
-  private val plotStatus: Array[Boolean] = Array.fill(9)(false)  // Moved here to track occupied plots
+  var plotStatus: Array[Boolean] = Array.fill(9)(false)  // Moved here to track occupied plots
 
   @FXML
   def initialize(): Unit = {
@@ -53,10 +53,8 @@ class GardenOverviewController(
       showOccupiedMessage()
     } else {
       MainApp.showPlantCrop(plotIndex)
-      occupyPlot(plotIndex)  // Mark the plot as occupied
-      playerState.addHarvestedPlants(1)
-      updateUI()
     }
+    updateUI()
   }
 
   private def isOccupied(plotIndex: Int): Boolean = {
