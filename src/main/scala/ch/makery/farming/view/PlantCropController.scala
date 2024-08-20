@@ -2,6 +2,8 @@ package ch.makery.farming.view
 
 import ch.makery.farming.model.crops.{Carrot, Crop, Wheat}
 import javafx.fxml.FXML
+import scalafxml.core.{FXMLLoader, NoDependencyResolver}
+
 import javafx.scene.control.{Button, Label, MenuButton, MenuItem}
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
@@ -16,7 +18,6 @@ class PlantCropController(
                            @FXML private var removePlantButton: Button) {
 
   private val crops: List[Crop] = List(new Carrot(), new Wheat())
-  private var isGridCellOccupied: Boolean = false
   private var currentPlantedCrop: Option[Crop] = None
 
   @FXML
@@ -24,7 +25,6 @@ class PlantCropController(
     cropMenuButton.setText("Select Crop")  // Set default text for the MenuButton
     populateMenuButton()
   }
-
 
   def populateMenuButton(): Unit = {
     crops.foreach { crop =>
@@ -47,7 +47,6 @@ class PlantCropController(
     currentPlantedCrop match {
       case Some(crop) if crop.seedsAvailable > 0 =>
         crop.seedsAvailable -= 1
-        isGridCellOccupied = true
         showAlert(AlertType.Information, "Planting", Some(s"Successfully planted ${crop.name}!"), s"Seeds left: ${crop.seedsAvailable}")
         updateUIAfterPlanting()
       case Some(_) =>
@@ -65,14 +64,13 @@ class PlantCropController(
   }
 
   def handleRemovePlantClick(): Unit = {
-    if (!isGridCellOccupied) {
+    if (currentPlantedCrop.isEmpty) {
       showAlert(AlertType.Warning, "Error", Some("The cell is already empty!"), "No plant to remove.")
       return
     }
 
     currentPlantedCrop.foreach { crop =>
       val removeResult = crop.removeCrop(100) // Assuming player always has enough coins
-      isGridCellOccupied = false
       currentPlantedCrop = None
       showAlert(removeResult._1 match {
         case true => AlertType.Information
@@ -88,4 +86,7 @@ class PlantCropController(
     alert.setContentText(content)
     alert.showAndWait()
   }
+
+
+
 }
