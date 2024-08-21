@@ -1,0 +1,36 @@
+
+.background {
+    -fx-background-image: url('/Images/backgroundImage.jpg');
+    -fx-background-size: cover;
+}
+
+.background2 {
+    -fx-background-image: url('/Images/backgroundimage2.jpg');
+    -fx-background-size: cover;
+}
+
+
+/* Style for the buttons */
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: #388E3C;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 5);
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+    -fx-cursor: hand;
+}
+
+.button:pressed {
+    -fx-background-color: #388E3C;
+}
+
+

@@ -59,35 +59,13 @@ class ShopController {
   private val watermelon = new Watermelon()
 
   @FXML
-  def initialize(): Unit = {
-    updateCropDetails()
-  }
-
-  @FXML
-  def updateCropDetails(): Unit = {
-    // Update Wheat details
+  private def initialize(): Unit = {
     wheatGrowthtime.setText(s"Growthtime: ${wheat.getGrowthTime}")
-    wheatCost.setText(s"Cost: ${wheat.getCost} coins")
-
-    // Update Corn details
     cornGrowthtime.setText(s"Growthtime: ${corn.getGrowthTime}")
-    cornCost.setText(s"Cost: ${corn.getCost} coins")
-
-    // Update Carrot details
     carrotGrowthtime.setText(s"Growthtime: ${carrot.getGrowthTime}")
-    carrotCost.setText(s"Cost: ${carrot.getCost} coins")
-
-    // Update Tomato details
     tomatoGrowthtime.setText(s"Growthtime: ${tomato.getGrowthTime}")
-    tomatoCost.setText(s"Cost: ${tomato.getCost} coins")
-
-    // Update Strawberry details
     strawberryGrowthtime.setText(s"Growthtime: ${strawberry.getGrowthTime}")
-    strawberryCost.setText(s"Cost: ${strawberry.getCost} coins")
-
-    // Update Watermelon details
     watermelonGrowthtime.setText(s"Growthtime: ${watermelon.getGrowthTime}")
-    watermelonCost.setText(s"Cost: ${watermelon.getCost} coins")
 
     // Set images for crops (assuming image paths are correct)
     wheatImage.setImage(new javafx.scene.image.Image("resources/wheat.png"))
@@ -102,12 +80,18 @@ class ShopController {
   def handleBuyButton(): Unit = {
     try {
       // Read quantities from text fields
-      val wheatQuantityValue = getQuantity(wheatQuantity)
-      val cornQuantityValue = getQuantity(cornQuantity)
-      val carrotQuantityValue = getQuantity(carrotQuantity)
-      val tomatoQuantityValue = getQuantity(tomatoQuantity)
-      val strawberryQuantityValue = getQuantity(strawberryQuantity)
-      val watermelonQuantityValue = getQuantity(watermelonQuantity)
+      val wheatQuantityValue = validateQuantity(wheatQuantity, "Wheat")
+      val cornQuantityValue = validateQuantity(cornQuantity, "Corn")
+      val carrotQuantityValue = validateQuantity(carrotQuantity, "Carrot")
+      val tomatoQuantityValue = validateQuantity(tomatoQuantity, "Tomato")
+      val strawberryQuantityValue = validateQuantity(strawberryQuantity, "Strawberry")
+      val watermelonQuantityValue = validateQuantity(watermelonQuantity, "Watermelon")
+
+      if (wheatQuantityValue == 0 && cornQuantityValue == 0 && carrotQuantityValue == 0 &&
+        tomatoQuantityValue == 0 && strawberryQuantityValue == 0 && watermelonQuantityValue == 0) {
+        showAlert(AlertType.Warning, "Input Error", "No input quantity", "Please enter quantities for crops you want to purchase.")
+        return
+      }
 
       // Calculate total cost
       val totalCost = wheatQuantityValue * wheat.getCost +
@@ -139,31 +123,32 @@ class ShopController {
 
           if (successfulWheat && successfulCorn && successfulCarrot &&
             successfulTomato && successfulStrawberry && successfulWatermelon) {
-            // Purchase successful
-            updateCropDetails()
             showAlert(AlertType.Information, "Purchase Successful", "Congratulations!", "Your purchase was successful!")
-
           } else {
-            // Restore seeds if purchase failed
-            wheat.addSeedsAvailable(wheatQuantityValue)
-            corn.addSeedsAvailable(cornQuantityValue)
-            carrot.addSeedsAvailable(carrotQuantityValue)
-            tomato.addSeedsAvailable(tomatoQuantityValue)
-            strawberry.addSeedsAvailable(strawberryQuantityValue)
-            watermelon.addSeedsAvailable(watermelonQuantityValue)
-
             showAlert(AlertType.Error, "Purchase Failed", "Insufficient Seeds", "Not enough seeds available in the store.")
-
           }
+        } else {
+          initialize() // User canceled the purchase, reinitialize the shop
         }
       } else {
         showAlert(AlertType.Error, "Purchase Failed", "Not Enough Coins", "You don't have enough coins to complete this purchase.")
-
       }
     } catch {
       case e: NumberFormatException =>
-        showAlert(AlertType.Error, "Input Error", "Invalid Quantity", "Please enter valid quantities for all crops.")
+        showAlert(AlertType.Error, "Input Error", "Invalid input", "Please enter valid integer quantities for all crops.")
+    }
+  }
 
+  private def validateQuantity(quantityField: TextField, cropName: String): Int = {
+    if (quantityField.getText == null || quantityField.getText.trim.isEmpty) {
+      return 0
+    }
+    try {
+      quantityField.getText.toInt
+    } catch {
+      case _: NumberFormatException =>
+        showAlert(AlertType.Error, "Invalid Input", s"Invalid input for $cropName", "Only integer values are allowed.")
+        throw new NumberFormatException() // Re-throw to be caught by the outer try-catch
     }
   }
 
@@ -174,17 +159,4 @@ class ShopController {
     alert.setContentText(contentText)
     alert.showAndWait()
   }
-
-  private def getQuantity(quantityField: TextField): Int = {
-    if (quantityField != null && quantityField.getText != null && !quantityField.getText.trim.isEmpty) {
-      try {
-        quantityField.getText.toInt
-      } catch {
-        case _: NumberFormatException => 0 // Default to 0 if parsing fails
-      }
-    } else {
-      0 // Default to 0 if the TextField is null or empty
-    }
-  }
-
 }
