@@ -1,12 +1,22 @@
-
 .background {
     -fx-background-image: url('/Images/backgroundImage.jpg');
-    -fx-background-size: cover;
+    -fx-background-size: 100% 100%; /* Ensures the background image covers the full size of the AnchorPane */
+    -fx-background-position: center center; /* Keeps the image centered */
+    -fx-background-repeat: no-repeat; /* Prevents the image from repeating */
 }
 
 .background2 {
     -fx-background-image: url('/Images/backgroundImage2.png');
-    -fx-background-size: cover;
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+.background3 {
+    -fx-background-image: url('/Images/backgroundImage3.png');
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
 }
 
 
@@ -44,24 +54,28 @@
 }
 
 
-#coinsLabel {
-    -fx-background-color: #6A6F73;
-    -fx-text-fill: white;
-    -fx-font-size: 24px;
-    -fx-padding: 5px 20px;
-    -fx-background-radius: 20px;
-    -fx-border-radius: 20px;
-    -fx-border-color: #C1A561;
-    -fx-border-width: 3px;
+/* FarmGame.css */
+.coin-label, .harvest-label {
+    -fx-alignment: center-left;
+    -fx-spacing: 5;  /* spacing between the icon and the text */
+    -fx-background-color: #555555;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+    -fx-border-radius: 20;
 }
 
-#totalharvestplantLabel {
-    -fx-background-color: #6A6F73;
-    -fx-text-fill: white;
-    -fx-font-size: 24px;
-    -fx-padding: 5px 20px;
-    -fx-background-radius: 20px;
-    -fx-border-radius: 20px;
-    -fx-border-color: #C1A561;
-    -fx-border-width: 3px;
+.coin-label .label-text {
+    -fx-font-size: 15px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.harvest-label .label-text {
+    -fx-font-size: 10px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.top-left-labels {
+    -fx-alignment: top-left;
 }

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="357.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -12,6 +12,6 @@
             <Font name="Franklin Gothic Heavy" size="27.0" />
          </font>
       </Label>
-      <Label layoutX="43.0" layoutY="53.0" prefHeight="114.0" prefWidth="272.0" text="Click the garden grid to plant the crop. " textAlignment="CENTER" />
+      <Text layoutX="36.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click on an empty plot to plant seeds from your inventory.Wait for crops to grow and click on them to harvest.Earn coins by selling harvested crops in your inventory.Keep an eye on your total harvested plants and coin balance as you manage your garden!" wrappingWidth="292.80340576171875" />
    </children>
 </AnchorPane>

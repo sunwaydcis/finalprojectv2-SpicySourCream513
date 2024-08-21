@@ -7,11 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" styleClass="background2" stylesheets="@FarmGame.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.farming.view.GardenOverviewController">
    <children>
-      <GridPane fx:id="gardenGrid" alignment="CENTER" gridLinesVisible="true" layoutX="135.0" layoutY="127.0" styleClass="grid-pane" stylesheets="@FarmGame.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="50.0">
+      <GridPane fx:id="gardenGrid" alignment="CENTER" layoutX="135.0" layoutY="127.0" styleClass="grid-pane" stylesheets="@FarmGame.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="50.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -31,19 +34,32 @@
       <Button layoutX="32.0" layoutY="426.0" mnemonicParsing="false" onAction="#returnHome" text="Return Home" />
       <Button layoutX="680.0" layoutY="354.0" mnemonicParsing="false" onAction="#getShop" text="Shop" />
       <Button layoutX="663.0" layoutY="413.0" mnemonicParsing="false" onAction="#getInventory" text="Inventory" />
-      <Label fx:id="coinsLabel" layoutX="61.0" layoutY="50.0" text="\$100" />
-      <Label fx:id="totalharvestplantLabel" layoutX="61.0" layoutY="101.0" text="Total Harvest Plant" />
-      <Label layoutX="47.0" layoutY="250.0" text="Instruction" />
-      <ImageView fitHeight="49.0" fitWidth="50.0" layoutX="7.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/coinIcon.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="13.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/totalharvestplantIcon.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="74.0" layoutY="27.0" text="Label" />
+      <Label layoutX="32.0" layoutY="242.0" />
+
+      <HBox layoutX="16.0" layoutY="58.0" prefHeight="46.0" prefWidth="173.0" styleClass="coin-label">
+         <children>
+            <ImageView fx:id="coinIcon" fitHeight="30.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+               <image>
+                  <Image url="@../../../../Images/coinIcon.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="coinsLabel" styleClass="label-text" text="\$100" />
+         </children>
+      </HBox>
+      <HBox layoutX="18.0" layoutY="115.0" prefHeight="46.0" prefWidth="173.0" styleClass="harvest-label" stylesheets="@FarmGame.css">
+         <children>
+            <ImageView fx:id="totalharvestplantIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+               <image>
+                  <Image url="@../../../../Images/totalharvestplantIcon.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="totalharvestplantLabel" styleClass="label-text" text="Total Harvest Plant" />
+         </children>
+      </HBox>
+      <Text fill="#3c3636" layoutX="34.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click the empty plot to plant the seeds now!" wrappingWidth="137.63671875">
+         <font>
+            <Font name="Franklin Gothic Demi" size="12.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
