@@ -47,7 +47,7 @@ class PlantCropController(
 
   def updateCropDetails(selectedCrop: Crop): Unit = {
     seedsLabel.setText(s"${selectedCrop.seedsAvailable} seeds available.")
-    descriptionLabel.setText(selectedCrop.getDescription())
+    descriptionLabel.setText(selectedCrop.getDescription.toString())
     currentPlantedCrop = Some(selectedCrop)
   }
 

@@ -1,29 +1,51 @@
 package ch.makery.farming.model.crops
 
-abstract class Crop(val name: String,
-                    private var _growthTimeInSeconds: Int,
-                    var cost: Double,
-                    var sellPrice: Double,
-                    var seedsAvailable: Int, // New attribute for seed availability
-                    var isMature: Boolean = false) {
+abstract class Crop(
+                     val name: String,
+                     private var _growthTimeInSeconds: Int,
+                     val cost: Double,
+                     val sellPrice: Double,
+                     var seedsAvailable: Int,
+                     var isMature: Boolean = false
+                   ) {
 
   // Convert growth time from seconds to minutes and seconds
-  def convertToMinutes: String = {
+  def getGrowthTime: String = {
     val minutes = _growthTimeInSeconds / 60
     val seconds = _growthTimeInSeconds % 60
     f"$minutes%d minutes and $seconds%d seconds"
   }
 
-  // Show crop description
-  def getDescription(): String = s"The $name costs $cost coins to plant and can be sold for $sellPrice coins when mature."
+  def getName: String = name
 
-  // Show available seeds
-  def getAvailableSeeds(): String = s"You have $seedsAvailable seeds available."
+  // Get the cost of the crop
+  def getCost: Double = cost
 
-  // Method to remove the crop, deducting 10 coins
-  def removeCrop(playerCoins: Int): (Boolean, String) = {
-    if (playerCoins >= 10) {
-      (true, s"$name has been removed, costing 10 coins.")
+  def getSellPrice: Double = sellPrice
+
+  def getAvailableSeeds: Int = seedsAvailable
+
+  def addSeedsAvailable(amount: Int): Unit = {
+    seedsAvailable += amount
+  }
+
+  def deductSeedsAvailable(amount: Int): Boolean = {
+    if (seedsAvailable >= amount) {
+      seedsAvailable -= amount
+      true
+    } else {
+      false
+    }
+  }
+
+  def getDescription: String = {
+    s"The $name costs $cost coins to plant and can be sold for $sellPrice coins when mature."
+  }
+
+  // Method to remove the crop with a specified cost
+  def removeCrop(playerCoins: Int, removalCost: Int = 10): (Boolean, String) = {
+    if (playerCoins >= removalCost) {
+      (true, s"$name has been removed, costing $removalCost coins.")
     } else {
       (false, "Not enough coins to remove the crop.")
     }
@@ -38,7 +60,11 @@ abstract class Crop(val name: String,
     }
   }
 
-  def checkMaturity(): Boolean = _growthTimeInSeconds == 0 && isMature
+  // Check if the crop is mature
+  def checkMaturity: Boolean = _growthTimeInSeconds == 0 && isMature
 
+  // Override toString method for debugging purposes
+  override def toString: String = {
+    s"Crop(name=$name, growthTime=${getGrowthTime}, cost=$cost, sellPrice=$sellPrice, seedsAvailable=$seedsAvailable, isMature=$isMature)"
+  }
 }
-
