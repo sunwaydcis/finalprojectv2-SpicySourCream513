@@ -15,7 +15,6 @@ class GardenOverviewController(
                                 @FXML private var coinsLabel: Label,
                                 @FXML private var totalharvestplantLabel: Label ) {
 
-  var plotStatus: Array[Boolean] = Array.fill(9)(false)
   private val playerState = new PlayerState()
 
   @FXML
@@ -49,24 +48,12 @@ class GardenOverviewController(
     val button = event.getSource.asInstanceOf[Button]
     val plotIndex = gardenGrid.getChildren.indexOf(button)
 
-    if (isOccupied(plotIndex)) {
+    if (playerState.isOccupied(plotIndex)) {
       showOccupiedMessage()
     } else {
       MainApp.showPlantCrop(plotIndex)
     }
     updateUI()
-  }
-
-  def isOccupied(plotIndex: Int): Boolean = {
-    plotStatus(plotIndex)
-  }
-
-  def occupyPlot(plotIndex: Int): Unit = {
-    plotStatus(plotIndex) = true
-  }
-
-  def unoccupyPlot(plotIndex: Int): Unit = {
-    plotStatus(plotIndex) = false
   }
 
   private def showOccupiedMessage(): Unit = {
