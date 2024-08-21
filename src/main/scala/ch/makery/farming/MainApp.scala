@@ -6,6 +6,7 @@ import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
+import scalafx.scene.image.Image
 import scalafx.stage.{Stage, StageStyle}
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 
@@ -21,6 +22,7 @@ object MainApp extends JFXApp {
   // initialize stage
   stage = new PrimaryStage {
     title = "Farming Game"
+    icons += new Image(getClass.getResourceAsStream("/images/toplogo.png"))
     scene = new Scene {
       root = roots
     }

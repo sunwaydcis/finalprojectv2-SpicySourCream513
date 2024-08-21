@@ -1,6 +1,7 @@
 package ch.makery.farming.view
 
 import ch.makery.farming.model.crops.{Carrot, Crop, Wheat}
+import ch.makery.farming.model.items.PlayerState
 import javafx.fxml.FXML
 import javafx.scene.control.{Button, Label, MenuButton, MenuItem}
 import scalafx.event.ActionEvent
@@ -18,11 +19,13 @@ class PlantCropController(
 
   private val crops: List[Crop] = List(new Carrot(), new Wheat())
   private var currentPlantedCrop: Option[Crop] = None
-  var plotStatus: Array[Boolean] = _
+  private var playerState: PlayerState = _
+  private var plotIndex: Int = -1 // Initialize with an invalid index
 
-  // Method to set plotStatus from outside
-  def setPlotStatus(status: Array[Boolean]): Unit = {
-    plotStatus = status
+
+  def initializeController(state: PlayerState, index: Int): Unit = {
+    playerState = state
+    plotIndex = index
   }
 
   @FXML
@@ -52,11 +55,10 @@ class PlantCropController(
   def handlePlantClick(event: ActionEvent): Unit = {
     currentPlantedCrop match {
       case Some(crop) if crop.seedsAvailable > 0 =>
-        val plotIndex = getPlotIndex(event)  // Assuming you have a way to get the plot index from the event
-        if (!plotStatus(plotIndex)) { // Check if the plot is not already occupied
+        if (!playerState.isOccupied(plotIndex)) {
           crop.seedsAvailable -= 1
-          plotStatus(plotIndex) = true  // Mark plot as occupied
-          currentPlantedCrop = Some(crop) // Update current planted crop
+          playerState.occupyPlot(plotIndex)
+          currentPlantedCrop = Some(crop)
           showAlert(AlertType.Information, "Planting", Some(s"Successfully planted ${crop.name}!"), s"Seeds left: ${crop.seedsAvailable}")
         } else {
           showAlert(AlertType.Warning, "Error", Some("This plot is already occupied!"), "Please select another plot.")
@@ -68,28 +70,18 @@ class PlantCropController(
     }
   }
 
-  private def getPlotIndex(event: ActionEvent): Int = {
-    // Logic to determine the plot index based on the event or button clicked
-    // This will depend on how you're managing the grid and button clicks
-    0  // Placeholder
-  }
-
   @FXML
   def handleRemovePlantClick(event: ActionEvent): Unit = {
-    val plotIndex = getPlotIndex(event) // Get the plot index based on the event
-
-    // Ensure plotStatus is not null and plotIndex is valid
-    if (plotStatus != null && plotIndex >= 0 && plotIndex < plotStatus.length) {
-      if (plotStatus(plotIndex)) { // If the plot is occupied
-        plotStatus(plotIndex) = false  // Mark plot as unoccupied
-        currentPlantedCrop = None      // Remove the planted crop
+    if (playerState != null && plotIndex >= 0) {
+      if (playerState.isOccupied(plotIndex)) {
+        playerState.unoccupyPlot(plotIndex)
+        currentPlantedCrop = None
         showAlert(AlertType.Information, "Removing", Some("Plant removed successfully!"), "The plot is now empty.")
       } else {
         showAlert(AlertType.Warning, "Error", Some("The cell is already empty!"), "No plant to remove.")
       }
     } else {
-      // Handle the case where plotStatus is null or plotIndex is invalid
-      showAlert(AlertType.Error, "Error", Some("Invalid plot status or index!"), "Please try again.")
+      showAlert(AlertType.Error, "Error", Some("Invalid plot index or player state!"), "Please try again.")
     }
   }
 
