@@ -1,6 +1,6 @@
 package ch.makery.farming.view
 
-import ch.makery.farming.model.crops.{Carrot, Crop, Wheat}
+import ch.makery.farming.model.crops.{Carrot, Crop, Wheat, Corn, Strawberry, Watermelon}
 import ch.makery.farming.model.items.PlayerState
 import javafx.fxml.FXML
 import javafx.scene.control.{Button, Label, MenuButton, MenuItem}
@@ -17,7 +17,7 @@ class PlantCropController(
                            @FXML private var plantButton: Button,
                            @FXML private var removePlantButton: Button) {
 
-  private val crops: List[Crop] = List(new Carrot(), new Wheat())
+  private val crops: List[Crop] = List(new Carrot(), new Wheat(), new Corn(), new Strawberry(), new Watermelon())
   private var currentPlantedCrop: Option[Crop] = None
   private var playerState: PlayerState = _
   private var plotIndex: Int = -1 // Initialize with an invalid index
@@ -47,7 +47,7 @@ class PlantCropController(
 
   def updateCropDetails(selectedCrop: Crop): Unit = {
     seedsLabel.setText(s"${selectedCrop.seedsAvailable} seeds available.")
-    descriptionLabel.setText(selectedCrop.getDescription.toString())
+    descriptionLabel.setText(selectedCrop.getDescription(selectedCrop))
     currentPlantedCrop = Some(selectedCrop)
   }
 

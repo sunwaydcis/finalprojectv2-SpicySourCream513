@@ -6,7 +6,8 @@ abstract class Crop(
                      val cost: Double,
                      val sellPrice: Double,
                      var seedsAvailable: Int,
-                     var isMature: Boolean = false
+                     var isMature: Boolean = false,
+                     var harvestedCrops: Int = 0
                    ) {
 
   // Convert growth time from seconds to minutes and seconds
@@ -25,6 +26,9 @@ abstract class Crop(
 
   def getAvailableSeeds: Int = seedsAvailable
 
+  def getHarvestedCrops: Int = harvestedCrops
+
+
   def addSeedsAvailable(amount: Int): Unit = {
     seedsAvailable += amount
   }
@@ -32,6 +36,19 @@ abstract class Crop(
   def deductSeedsAvailable(amount: Int): Boolean = {
     if (seedsAvailable >= amount) {
       seedsAvailable -= amount
+      true
+    } else {
+      false
+    }
+  }
+
+  def addHarvestedCrops(amount: Int): Unit = {
+    harvestedCrops += amount
+  }
+
+  def deductHarvestedCrops(amount: Int): Boolean = {
+    if (harvestedCrops >= amount) {
+      harvestedCrops -= amount
       true
     } else {
       false

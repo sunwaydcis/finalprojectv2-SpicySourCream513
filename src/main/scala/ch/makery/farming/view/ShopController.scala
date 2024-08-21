@@ -1,7 +1,7 @@
 package ch.makery.farming.view
 
 import javafx.fxml.FXML
-import ch.makery.farming.model.crops.{Carrot, Corn, Strawberry, Tomato, Watermelon, Wheat}
+import ch.makery.farming.model.crops.{Carrot, Corn, Strawberry, Watermelon, Wheat}
 import ch.makery.farming.model.items.PlayerState
 import javafx.scene.control.{Alert, ButtonType, Label, TextField}
 import javafx.scene.image.ImageView
@@ -25,11 +25,6 @@ class ShopController {
   @FXML private var carrotCost: Label = _
   @FXML private var carrotQuantity: TextField = _
 
-  //Tomato
-  @FXML private var tomatoGrowthtime: Label = _
-  @FXML private var tomatoCost: Label = _
-  @FXML private var tomatoQuantity: TextField = _
-
   //Strawberry
   @FXML private var strawberryGrowthtime: Label = _
   @FXML private var strawberryCost: Label = _
@@ -45,7 +40,6 @@ class ShopController {
   @FXML private var cornImage: ImageView = _
   @FXML private var strawberryImage: ImageView = _
   @FXML private var watermelonImage: ImageView = _
-  @FXML private var tomatoImage: ImageView = _
   @FXML private var carrotImage: ImageView = _
 
   private var playerState: PlayerState = _
@@ -54,7 +48,6 @@ class ShopController {
   private val wheat = new Wheat()
   private val corn = new Corn()
   private val carrot = new Carrot()
-  private val tomato = new Tomato()
   private val strawberry = new Strawberry()
   private val watermelon = new Watermelon()
 
@@ -63,7 +56,6 @@ class ShopController {
     wheatGrowthtime.setText(s"Growthtime: ${wheat.getGrowthTime}")
     cornGrowthtime.setText(s"Growthtime: ${corn.getGrowthTime}")
     carrotGrowthtime.setText(s"Growthtime: ${carrot.getGrowthTime}")
-    tomatoGrowthtime.setText(s"Growthtime: ${tomato.getGrowthTime}")
     strawberryGrowthtime.setText(s"Growthtime: ${strawberry.getGrowthTime}")
     watermelonGrowthtime.setText(s"Growthtime: ${watermelon.getGrowthTime}")
 
@@ -71,7 +63,6 @@ class ShopController {
     wheatImage.setImage(new javafx.scene.image.Image("resources/wheat.png"))
     cornImage.setImage(new javafx.scene.image.Image("resources/corn.png"))
     carrotImage.setImage(new javafx.scene.image.Image("resources/carrot.png"))
-    tomatoImage.setImage(new javafx.scene.image.Image("resources/tomato.png"))
     strawberryImage.setImage(new javafx.scene.image.Image("resources/strawberry.png"))
     watermelonImage.setImage(new javafx.scene.image.Image("resources/watermelon.png"))
   }
@@ -83,12 +74,11 @@ class ShopController {
       val wheatQuantityValue = validateQuantity(wheatQuantity, "Wheat")
       val cornQuantityValue = validateQuantity(cornQuantity, "Corn")
       val carrotQuantityValue = validateQuantity(carrotQuantity, "Carrot")
-      val tomatoQuantityValue = validateQuantity(tomatoQuantity, "Tomato")
       val strawberryQuantityValue = validateQuantity(strawberryQuantity, "Strawberry")
       val watermelonQuantityValue = validateQuantity(watermelonQuantity, "Watermelon")
 
       if (wheatQuantityValue == 0 && cornQuantityValue == 0 && carrotQuantityValue == 0 &&
-        tomatoQuantityValue == 0 && strawberryQuantityValue == 0 && watermelonQuantityValue == 0) {
+        strawberryQuantityValue == 0 && watermelonQuantityValue == 0) {
         showAlert(AlertType.Warning, "Input Error", "No input quantity", "Please enter quantities for crops you want to purchase.")
         return
       }
@@ -97,7 +87,6 @@ class ShopController {
       val totalCost = wheatQuantityValue * wheat.getCost +
         cornQuantityValue * corn.getCost +
         carrotQuantityValue * carrot.getCost +
-        tomatoQuantityValue * tomato.getCost +
         strawberryQuantityValue * strawberry.getCost +
         watermelonQuantityValue * watermelon.getCost
 
@@ -117,12 +106,11 @@ class ShopController {
           val successfulWheat = wheat.deductSeedsAvailable(wheatQuantityValue)
           val successfulCorn = corn.deductSeedsAvailable(cornQuantityValue)
           val successfulCarrot = carrot.deductSeedsAvailable(carrotQuantityValue)
-          val successfulTomato = tomato.deductSeedsAvailable(tomatoQuantityValue)
           val successfulStrawberry = strawberry.deductSeedsAvailable(strawberryQuantityValue)
           val successfulWatermelon = watermelon.deductSeedsAvailable(watermelonQuantityValue)
 
           if (successfulWheat && successfulCorn && successfulCarrot &&
-            successfulTomato && successfulStrawberry && successfulWatermelon) {
+            successfulStrawberry && successfulWatermelon) {
             showAlert(AlertType.Information, "Purchase Successful", "Congratulations!", "Your purchase was successful!")
           } else {
             showAlert(AlertType.Error, "Purchase Failed", "Insufficient Seeds", "Not enough seeds available in the store.")
