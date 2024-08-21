@@ -47,7 +47,7 @@ class PlantCropController(
 
   def updateCropDetails(selectedCrop: Crop): Unit = {
     seedsLabel.setText(s"${selectedCrop.seedsAvailable} seeds available.")
-    descriptionLabel.setText(selectedCrop.getDescription(selectedCrop))
+    descriptionLabel.setText(selectedCrop.getDescription)
     currentPlantedCrop = Some(selectedCrop)
   }
 
@@ -89,5 +89,8 @@ class PlantCropController(
   private def showAlert(alertType: AlertType, title: String, header: Option[String], content: String): Unit = {
     val alert = new Alert(alertType)
     alert.setTitle(title)
+    header.foreach(alert.setHeaderText)
+    alert.setContentText(content)
+    alert.showAndWait()
   }
-  }
+}

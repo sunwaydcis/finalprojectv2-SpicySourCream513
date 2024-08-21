@@ -56,7 +56,7 @@ abstract class Crop(
   }
 
   def getDescription: String = {
-    s"The $name costs $cost coins to plant and can be sold for $sellPrice coins when mature."
+    "This is Plant Description"
   }
 
   // Method to remove the crop with a specified cost
