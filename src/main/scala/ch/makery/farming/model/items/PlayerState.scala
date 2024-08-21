@@ -1,6 +1,6 @@
 package ch.makery.farming.model.items
 
-class PlayerState(var coins: Int = 100,
+class PlayerState(var coins: Double = 100,
                   var totalHarvestedPlants: Int = 0) {
 
   // Array to track occupied plots
@@ -19,7 +19,7 @@ class PlayerState(var coins: Int = 100,
   }
 
   // Method to deduct coins, e.g., when removing a crop
-  def deductCoins(amount: Int): Boolean = {
+  def deductCoins(amount: Double): Boolean = {
     if (coins >= amount) {
       coins -= amount
       true
@@ -29,7 +29,7 @@ class PlayerState(var coins: Int = 100,
   }
 
   // Method to add coins, e.g., when selling a crop
-  def addCoins(amount: Int): Unit = {
+  def addCoins(amount: Double): Unit = {
     coins += amount
   }
 
@@ -38,7 +38,7 @@ class PlayerState(var coins: Int = 100,
     totalHarvestedPlants += count
   }
 
-  def getCoins(): Int = {
+  def getCoins(): Double = {
     coins
   }
 

@@ -1,13 +1,12 @@
 package ch.makery.farming.view
 
+import javafx.fxml.FXML
 import ch.makery.farming.model.crops.{Carrot, Corn, Strawberry, Tomato, Watermelon, Wheat}
 import ch.makery.farming.model.items.PlayerState
-import javafx.fxml.FXML
 import javafx.scene.control.{Alert, ButtonType, Label, TextField}
 import javafx.scene.image.ImageView
 import scalafx.scene.control.Alert.AlertType
 import scalafxml.core.macros.sfxml
-import java.util.Optional
 
 @sfxml
 class ShopController {
@@ -60,11 +59,12 @@ class ShopController {
   private val watermelon = new Watermelon()
 
   @FXML
-  private def initialize(): Unit = {
+  def initialize(): Unit = {
     updateCropDetails()
   }
 
-  private def updateCropDetails(): Unit = {
+  @FXML
+  def updateCropDetails(): Unit = {
     // Update Wheat details
     wheatGrowthtime.setText(s"Growthtime: ${wheat.getGrowthTime}")
     wheatCost.setText(s"Cost: ${wheat.getCost} coins")
@@ -99,7 +99,7 @@ class ShopController {
   }
 
   @FXML
-  private def handlePurchase(): Unit = {
+  def handleBuyButton(): Unit = {
     try {
       // Read quantities from text fields
       val wheatQuantityValue = getQuantity(wheatQuantity)
@@ -126,8 +126,7 @@ class ShopController {
         confirmation.setContentText(s"Total cost: $totalCost coins")
         val result = confirmation.showAndWait()
 
-        if (result.contains(ButtonType.OK)) {
-          // Deduct coins from player
+        if (result.isPresent && result.get == ButtonType.OK) {
           playerState.coins -= totalCost
 
           // Deduct seeds from store
@@ -141,7 +140,9 @@ class ShopController {
           if (successfulWheat && successfulCorn && successfulCarrot &&
             successfulTomato && successfulStrawberry && successfulWatermelon) {
             // Purchase successful
-            updateCropDetails()  // Refresh details to reflect updated seed quantities
+            updateCropDetails()
+            showAlert(AlertType.Information, "Purchase Successful", "Congratulations!", "Your purchase was successful!")
+
           } else {
             // Restore seeds if purchase failed
             wheat.addSeedsAvailable(wheatQuantityValue)
@@ -175,6 +176,15 @@ class ShopController {
   }
 
   private def getQuantity(quantityField: TextField): Int = {
-    Option(quantityField.getText).filter(_.nonEmpty).map(_.toInt).getOrElse(0)
+    if (quantityField != null && quantityField.getText != null && !quantityField.getText.trim.isEmpty) {
+      try {
+        quantityField.getText.toInt
+      } catch {
+        case _: NumberFormatException => 0 // Default to 0 if parsing fails
+      }
+    } else {
+      0 // Default to 0 if the TextField is null or empty
+    }
   }
+
 }
