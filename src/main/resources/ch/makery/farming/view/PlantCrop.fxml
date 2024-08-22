@@ -14,7 +14,7 @@
          </font>
       </Label>
       <Label fx:id="seedsLabel" layoutX="224.0" layoutY="134.0" text="You have 5 seeds for this plant" />
-      <Label fx:id="descriptionLabel" layoutX="251.0" layoutY="166.0" text="Plant description" />
+      <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="166.0" prefHeight="17.0" prefWidth="619.0" text="Plant description" textAlignment="CENTER" />
       <Button layoutX="230.0" layoutY="238.0" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" />
       <Button layoutX="317.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleRemovePlantClick" text="Remove Plant" />
       <ChoiceBox fx:id="cropChoicebox" layoutX="149.0" layoutY="95.0" prefHeight="25.0" prefWidth="376.0" />

@@ -90,7 +90,6 @@ object MainApp extends JFXApp {
     val loader = new FXMLLoader(resource, NoDependencyResolver) // NoDependencyResolver is fine here
     loader.load()
     val root = loader.getRoot[jfxs.layout.AnchorPane]
-
     val stage = new Stage(StageStyle.DECORATED)
     stage.setTitle(s"Plant a Crop - Plot $plotIndex")
     stage.setScene(new jfxs.Scene(root))

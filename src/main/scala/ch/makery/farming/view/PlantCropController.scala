@@ -1,35 +1,28 @@
 package ch.makery.farming.view
 
-import javafx.fxml.FXML
-import javafx.scene.control.{Alert, ButtonType, ChoiceBox, Label}
+import scalafx.scene.control.{Alert, ButtonType, ChoiceBox, Label}
 import ch.makery.farming.model.crops.{Carrot, Corn, Crop, Strawberry, Watermelon, Wheat}
 import ch.makery.farming.model.items.PlayerState
 import scalafx.scene.control.Alert.AlertType
 import scalafxml.core.macros.sfxml
+import scalafx.Includes._
 
-import javafx.collections.FXCollections
+import scalafx.collections.ObservableBuffer
 
 @sfxml
-class PlantCropController {
-
-  @FXML private var cropChoicebox: ChoiceBox[String] = _
-  @FXML private var seedsLabel: Label = _
-  @FXML private var descriptionLabel: Label = _
+class PlantCropController (
+  private var cropChoicebox: ChoiceBox[String],
+  private var seedsLabel: Label,
+  private var descriptionLabel: Label) {
 
   private var playerState: PlayerState = new PlayerState()
   private var selectedCrop: Crop = _
   private var currentPlantedCrop: Crop = _
 
+    cropChoicebox.items = ObservableBuffer("Carrot", "Corn", "Strawberry", "Watermelon", "Wheat")
 
-    if (cropChoicebox != null) {
-      cropChoicebox.setItems(FXCollections.observableArrayList("Carrot", "Corn", "Strawberry", "Watermelon", "Wheat"))
-      cropChoicebox.setValue("Select Crop")
+    cropChoicebox.setOnAction(_ => updateCropDetails())
 
-      cropChoicebox.setOnAction(_ => updateCropDetails())
-    }
-
-
-  @FXML
   def updateCropDetails(): Unit = {
     val cropName = cropChoicebox.getValue
     selectedCrop = cropName match {
@@ -47,7 +40,7 @@ class PlantCropController {
     }
   }
 
-  @FXML
+
   def handlePlantClick(): Unit = {
     if (selectedCrop == null) {
       showAlert("Error", "No crop selected", "Please select a crop to plant.")
@@ -72,7 +65,7 @@ class PlantCropController {
     }
   }
 
-  @FXML
+
   def handleRemovePlantClick(): Unit = {
     if (currentPlantedCrop == null) {
       showAlert("Error", "No Plant to Remove", "There is no plant to remove from this plot.")
@@ -85,11 +78,12 @@ class PlantCropController {
     showAlert("Success", "Crop Removed", "The crop has been successfully removed.")
   }
 
-  private def showAlert(title: String, header: String, content: String): Unit = {
-    val alert = new Alert(Alert.AlertType.INFORMATION)
-    alert.setTitle(title)
-    alert.setHeaderText(header)
-    alert.setContentText(content)
+  private def showAlert(_title: String, _header: String, content: String): Unit = {
+    val alert = new Alert(AlertType.Information) {
+      title = _title
+      headerText =  _header
+      contentText = content
+    }
     alert.showAndWait()
   }
 }

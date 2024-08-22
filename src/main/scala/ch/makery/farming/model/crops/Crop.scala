@@ -55,9 +55,7 @@ abstract class Crop(
     }
   }
 
-  def getDescription: String = {
-    "This is Plant Description"
-  }
+  def getDescription: String = {""}
 
   // Method to remove the crop with a specified cost
   def removeCrop(playerCoins: Int, removalCost: Int = 10): (Boolean, String) = {

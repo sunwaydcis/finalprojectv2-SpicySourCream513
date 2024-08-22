@@ -46,6 +46,7 @@ class InventoryController {
 
   @FXML
   def initialize(): Unit = {
+    playerState = new PlayerState()
     updateCropDetails()
   }
 
@@ -99,7 +100,8 @@ class InventoryController {
 
       // Show success message
       showAlert(AlertType.Information, "Sale Successful", "Congratulations!", s"Your sale was successful! You earned $totalProfit coins.")
-      updateCropDetails() // Refresh the inventory details
+      updateCropDetails()
+
     } catch {
       case e: NumberFormatException =>
         showAlert(AlertType.Error, "Input Error", "Invalid Input", "Please enter a valid integer quantity.")
@@ -108,7 +110,7 @@ class InventoryController {
     def validateQuantity(quantityField: TextField, crop: Crop): Int = {
       if (quantityField.getText == null || quantityField.getText.trim.isEmpty) {
         showAlert(AlertType.Warning, "Input Error", "No Input", "Please enter a quantity to sell.")
-        throw new NumberFormatException() // Force the catch block to handle this as an error
+        throw new NumberFormatException()
       }
 
       try {
