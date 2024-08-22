@@ -40,8 +40,8 @@
                      <font>
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font></Label>
-                        <Label fx:id="wheatGrowthtime" layoutX="16.0" layoutY="53.0" text="Growthtime" />
-                        <Label fx:id="wheatCost" layoutX="25.0" layoutY="80.0" text="Cost： $5" />
+                        <Label fx:id="wheatGrowthtime" alignment="CENTER" layoutY="40.0" prefHeight="49.0" prefWidth="105.0" text="Growthtime" />
+                        <Label fx:id="wheatCost" alignment="CENTER" layoutY="89.0" prefHeight="17.0" prefWidth="106.0" text="Cost： $5" />
                         <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
                         <TextField fx:id="wheatQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
                     </children>
@@ -50,8 +50,8 @@
                 <Pane prefHeight="185.0" prefWidth="88.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
                         <Label layoutX="26.0" layoutY="14.0" text="Corn Seed" />
-                        <Label fx:id="cornGrowthtime" layoutX="13.0" layoutY="51.0" text="Growthtime" />
-                        <Label fx:id="cornCost" layoutX="27.0" layoutY="80.0" text="Cost： $10" />
+                        <Label fx:id="cornGrowthtime" alignment="CENTER" layoutX="1.0" layoutY="39.0" prefHeight="49.0" prefWidth="106.0" text="Growthtime" />
+                        <Label fx:id="cornCost" alignment="CENTER" layoutX="1.0" layoutY="89.0" prefHeight="17.0" prefWidth="105.0" text="Cost： $10" />
                         <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
                         <TextField fx:id="cornQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
                     </children>
@@ -60,8 +60,8 @@
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                     <children>
                         <Label layoutX="20.0" layoutY="14.0" text="Carrot Seed " />
-                        <Label fx:id="carrotGrowthtime" layoutX="13.0" layoutY="51.0" text="Growthtime" />
-                        <Label fx:id="carrotCost" layoutX="27.0" layoutY="80.0" prefHeight="17.0" prefWidth="63.0" text="Cost: 20" />
+                        <Label fx:id="carrotGrowthtime" alignment="CENTER" layoutX="1.0" layoutY="39.0" prefHeight="49.0" prefWidth="105.0" text="Growthtime" />
+                        <Label fx:id="carrotCost" alignment="CENTER" layoutX="-1.0" layoutY="89.0" prefHeight="17.0" prefWidth="106.0" text="Cost: $20" />
                         <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
                         <TextField fx:id="carrotQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
                     </children>
@@ -70,8 +70,8 @@
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                     <children>
                         <Label layoutX="10.0" layoutY="14.0" text="Strawberry Seed" />
-                        <Label fx:id="strawberryGrowthtime" layoutX="14.0" layoutY="48.0" text="Growthtime" />
-                        <Label fx:id="strawberryCost" layoutX="25.0" layoutY="80.0" prefHeight="17.0" prefWidth="77.0" text="Cost: 50" />
+                        <Label fx:id="strawberryGrowthtime" alignment="CENTER" layoutY="38.0" prefHeight="49.0" prefWidth="106.0" text="Growthtime" />
+                        <Label fx:id="strawberryCost" alignment="CENTER" layoutX="-7.0" layoutY="89.0" prefHeight="17.0" prefWidth="105.0" text="Cost: $50" />
                         <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
                         <TextField fx:id="strawberryQuantity" layoutX="13.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
                     </children>
@@ -80,8 +80,8 @@
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                     <children>
                         <Label layoutX="5.0" layoutY="14.0" text="Watermelon Seed" />
-                        <Label fx:id="watermelonGrowthtime" layoutX="13.0" layoutY="48.0" text="Growthtime" />
-                        <Label fx:id="watermelonCost" layoutX="30.0" layoutY="80.0" prefHeight="17.0" prefWidth="53.0" text="Cost: 60" />
+                        <Label fx:id="watermelonGrowthtime" alignment="CENTER" layoutY="39.0" prefHeight="49.0" prefWidth="106.0" text="Growthtime" />
+                        <Label fx:id="watermelonCost" alignment="CENTER" layoutX="-8.0" layoutY="89.0" prefHeight="17.0" prefWidth="105.0" text="Cost: $60" />
                         <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
                         <TextField fx:id="watermelonQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
                     </children>

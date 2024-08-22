@@ -16,7 +16,7 @@ abstract class Crop(
   def getGrowthTime: String = {
     val minutes = growthTimeInSeconds / 60
     val seconds = growthTimeInSeconds % 60
-    f"$minutes%d minutes and $seconds%d seconds"
+    f"$minutes%d min $seconds%d sec"
   }
 
   def getName: String = name

@@ -1,6 +1,6 @@
 package ch.makery.farming.view
 
-import ch.makery.farming.model.crops.{Carrot, Corn, Strawberry, Watermelon, Wheat}
+import ch.makery.farming.model.crops.{Carrot, Corn, Crop, Strawberry, Watermelon, Wheat}
 import ch.makery.farming.model.items.PlayerState
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.control.{Alert, ButtonType, Label, TextField}
@@ -34,7 +34,6 @@ class ShopController (
   private var watermelonCost: Label,
   private var watermelonQuantity: TextField){
 
-
   private var playerState: PlayerState = _
 
   // Crops
@@ -44,13 +43,11 @@ class ShopController (
   private val strawberry = new Strawberry()
   private val watermelon = new Watermelon()
 
-
-    wheatGrowthtime.setText(s"Growthtime: ${wheat.getGrowthTime}")
-    cornGrowthtime.setText(s"Growthtime: ${corn.getGrowthTime}")
-    carrotGrowthtime.setText(s"Growthtime: ${carrot.getGrowthTime}")
-    strawberryGrowthtime.setText(s"Growthtime: ${strawberry.getGrowthTime}")
-    watermelonGrowthtime.setText(s"Growthtime: ${watermelon.getGrowthTime}")
-
+    wheatGrowthtime.setText(s"Growth Time:\n${wheat.getGrowthTime}")
+    cornGrowthtime.setText(s"Growth Time:\n${corn.getGrowthTime}")
+    carrotGrowthtime.setText(s"Growth Time:\n${carrot.getGrowthTime}")
+    strawberryGrowthtime.setText(s"Growth Time:\n${strawberry.getGrowthTime}")
+    watermelonGrowthtime.setText(s"Growth Time:\n${watermelon.getGrowthTime}")
 
   def handleBuyButton(): Unit = {
     try {
@@ -80,7 +77,7 @@ class ShopController (
 
         result match {
           case Some(ButtonType.OK) =>
-            playerState.coins -= totalCost
+            playerState.deductCoins(totalCost)
             wheat.addSeedsAvailable(wheatQuantityValue)
             corn.addSeedsAvailable(cornQuantityValue)
             carrot.addSeedsAvailable(carrotQuantityValue)
@@ -109,16 +106,20 @@ class ShopController (
   def validateQuantity(quantityField: TextField, cropName: String): Int = {
     try {
       val quantityStr = quantityField.text.value.trim
+
+      if (quantityStr.isEmpty) {
+        throw new NumberFormatException(s"No quantity is entered")
+      }
       val quantity = quantityStr.toInt
       if (quantity < 0) {
-        throw new NumberFormatException(s"$cropName quantity cannot be negative.")
+        throw new NumberFormatException("Quantity cannot be negative.")
       }
+
       quantity
 
     } catch {
       case _: NumberFormatException =>
-        showAlert("Input Error", s"Invalid quantity for $cropName", s"Please enter a valid non-negative integer for $cropName.")
-
+        showAlert("Input Error", s"Invalid quantity for $cropName", s"Please enter a valid non-negative integer in the $cropName quantity field.")
         throw new NumberFormatException(s"Invalid quantity entered for $cropName.")
     }
   }

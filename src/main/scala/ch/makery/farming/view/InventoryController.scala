@@ -2,38 +2,37 @@ package ch.makery.farming.view
 
 import ch.makery.farming.model.items.PlayerState
 import ch.makery.farming.model.crops._
-import javafx.fxml.FXML
-import javafx.scene.control.{Alert, ButtonType, Label, TextField}
 import scalafx.scene.control.Alert.AlertType
+import scalafx.scene.control.{Alert, ButtonType, Label, TextField}
+import scalafx.stage.Stage
 import scalafxml.core.macros.sfxml
 
 @sfxml
-class InventoryController {
+class InventoryController(
+  private var wheatSeedAvailable: Label,
+  private var wheatSellPrice: Label,
+  private var wheatQuantity: TextField,
+  private var wheatHarvest: Label,
 
-  @FXML private var wheatSeedAvailable: Label = _
-  @FXML private var wheatSellPrice: Label = _
-  @FXML private var wheatQuantity: TextField = _
-  @FXML private var wheatHarvest: Label = _
+  private var cornSeedAvailable: Label,
+  private var cornSellPrice: Label,
+  private var cornQuantity: TextField,
+  private var cornHarvest: Label,
 
-  @FXML private var cornSeedAvailable: Label = _
-  @FXML private var cornSellPrice: Label = _
-  @FXML private var cornQuantity: TextField = _
-  @FXML private var cornHarvest: Label = _
+  private var carrotSeedAvailable: Label,
+  private var carrotSellPrice: Label,
+  private var carrotQuantity: TextField,
+  private var carrotHarvest: Label,
 
-  @FXML private var carrotSeedAvailable: Label = _
-  @FXML private var carrotSellPrice: Label = _
-  @FXML private var carrotQuantity: TextField = _
-  @FXML private var carrotHarvest: Label = _
+  private var strawberrySeedAvailable: Label,
+  private var strawberrySellPrice: Label,
+  private var strawberryQuantity: TextField,
+  private var strawberryHarvest: Label,
 
-  @FXML private var strawberrySeedAvailable: Label = _
-  @FXML private var strawberrySellPrice: Label = _
-  @FXML private var strawberryQuantity: TextField = _
-  @FXML private var strawberryHarvest: Label = _
-
-  @FXML private var watermelonSeedAvailable: Label = _
-  @FXML private var watermelonSellPrice: Label = _
-  @FXML private var watermelonQuantity: TextField = _
-  @FXML private var watermelonHarvest: Label = _
+  private var watermelonSeedAvailable: Label,
+  private var watermelonSellPrice: Label,
+  private var watermelonQuantity: TextField,
+  private var watermelonHarvest: Label) {
 
   private var playerState: PlayerState = _
 
@@ -44,14 +43,8 @@ class InventoryController {
   private val strawberry = new Strawberry()
   private val watermelon = new Watermelon()
 
-  @FXML
-  def initialize(): Unit = {
-    playerState = new PlayerState()
-    updateCropDetails()
-  }
 
-  private def updateCropDetails(): Unit = {
-    // Fetch details from Crop class and update labels
+  def updateCropDetails(): Unit = {
     wheatSeedAvailable.setText(s"Seed: ${wheat.getAvailableSeeds}")
     wheatSellPrice.setText(s"Sell Price: ${wheat.getSellPrice} coins")
     wheatHarvest.setText(s"Harvest: ${wheat.getHarvestedCrops}")
@@ -73,15 +66,14 @@ class InventoryController {
     watermelonHarvest.setText(s"Harvest: ${watermelon.getHarvestedCrops}")
   }
 
-  @FXML
+
   def handleSellButton(): Unit = {
     try {
-      // Validate and fetch quantities from text fields
-      val wheatQuantityValue = validateQuantity(wheatQuantity, wheat)
-      val cornQuantityValue = validateQuantity(cornQuantity, corn)
-      val carrotQuantityValue = validateQuantity(carrotQuantity, carrot)
-      val strawberryQuantityValue = validateQuantity(strawberryQuantity, strawberry)
-      val watermelonQuantityValue = validateQuantity(watermelonQuantity, watermelon)
+      val wheatQuantityValue = validateQuantity(wheatQuantity, "Wheat")
+      val cornQuantityValue = validateQuantity(cornQuantity, "Corn")
+      val carrotQuantityValue = validateQuantity(carrotQuantity, "Carrot")
+      val strawberryQuantityValue = validateQuantity(strawberryQuantity, "Strawberry")
+      val watermelonQuantityValue = validateQuantity(watermelonQuantity, "Watermelon")
 
       // Calculate total profit
       val totalProfit = wheatQuantityValue * wheat.sellPrice +
@@ -90,49 +82,83 @@ class InventoryController {
         strawberryQuantityValue * strawberry.sellPrice +
         watermelonQuantityValue * watermelon.sellPrice
 
-      // Update player's state and crop details
-      playerState.addCoins(totalProfit)
-      wheat.deductHarvestedCrops(wheatQuantityValue)
-      corn.deductHarvestedCrops(cornQuantityValue)
-      carrot.deductHarvestedCrops(carrotQuantityValue)
-      strawberry.deductHarvestedCrops(strawberryQuantityValue)
-      watermelon.deductHarvestedCrops(watermelonQuantityValue)
+      val totalQuantityValue = wheatQuantityValue + cornQuantityValue + carrotQuantityValue + strawberryQuantityValue + watermelonQuantityValue
 
-      // Show success message
-      showAlert(AlertType.Information, "Sale Successful", "Congratulations!", s"Your sale was successful! You earned $totalProfit coins.")
-      updateCropDetails()
+      // Check if player has enough coins
+      if (playerState.totalHarvestedPlants >= totalQuantityValue) {
+        // Confirm selling //show confirm message
+        val alert = new Alert(AlertType.Confirmation) {
+          title = "Confirm Sell"
+          headerText = "Are you sure you want to sell the harvested plant?"
+          contentText = s"Total profit: $$$totalProfit coins"
+        }
+        val result = alert.showAndWait()
+
+        result match {
+          case Some(ButtonType.OK) =>
+            playerState.addCoins(totalProfit)
+            wheat.deductHarvestedCrops(wheatQuantityValue)
+            corn.deductHarvestedCrops(cornQuantityValue)
+            carrot.deductHarvestedCrops(carrotQuantityValue)
+            strawberry.deductHarvestedCrops(strawberryQuantityValue)
+            watermelon.deductHarvestedCrops(watermelonQuantityValue)
+
+            showInformation("Sell Successful", "Congratulations!", "Your Selling was successful! You Earn the coins!")
+
+            val stage = wheatQuantity.getScene.getWindow.asInstanceOf[Stage]
+            stage.close()
+
+          case _ =>
+            val stage = wheatQuantity.getScene.getWindow.asInstanceOf[Stage]
+            stage.close()
+        }
+      }
+      showAlert("Sell Failed", "Insufficient Harvested Crop", "Not enough Harvested Crop to complete the sell.")
+
 
     } catch {
       case e: NumberFormatException =>
-        showAlert(AlertType.Error, "Input Error", "Invalid Input", "Please enter a valid integer quantity.")
+        showAlert("Input Error", "Invalid input", "Please enter valid integer quantities for all crops.")
     }
+  }
 
-    def validateQuantity(quantityField: TextField, crop: Crop): Int = {
-      if (quantityField.getText == null || quantityField.getText.trim.isEmpty) {
-        showAlert(AlertType.Warning, "Input Error", "No Input", "Please enter a quantity to sell.")
-        throw new NumberFormatException()
+
+  def validateQuantity(quantityField: TextField, cropName: String): Int = {
+    try {
+      val quantityStr = quantityField.text.value.trim
+
+      if (quantityStr.isEmpty) {
+        throw new NumberFormatException(s"No quantity is entered")
+      }
+      val quantity = quantityStr.toInt
+      if (quantity < 0) {
+        throw new NumberFormatException("Quantity cannot be negative.")
       }
 
-      try {
-        val quantity = quantityField.getText.toInt
-        if (quantity > crop.getHarvestedCrops) {
-          showAlert(AlertType.Error, "Insufficient Harvest", "Not Enough Harvested Crops", s"You don't have enough harvested crops of ${crop.getName}. Reduce the quantity.")
-          throw new NumberFormatException() // Force the catch block to handle this as an error
-        }
-        quantity
-      } catch {
-        case _: NumberFormatException =>
-          showAlert(AlertType.Error, "Invalid Input", "Invalid Quantity", "Please enter a valid integer quantity.")
-          throw new NumberFormatException() // Re-throw to be caught by the outer try-catch
-      }
-    }
+      quantity
 
-    def showAlert(alertType: AlertType, title: String, headerText: String, contentText: String): Unit = {
-      val alert = new Alert(alertType)
-      alert.setTitle(title)
-      alert.setHeaderText(headerText)
-      alert.setContentText(contentText)
-      alert.showAndWait()
+    } catch {
+      case _: NumberFormatException =>
+        showAlert("Input Error", s"Invalid quantity for $cropName", s"Please enter a valid non-negative integer in the $cropName quantity field.")
+        throw new NumberFormatException(s"Invalid quantity entered for $cropName.")
     }
+  }
+
+  def showAlert(_title: String, _header: String, _content: String): Unit = {
+    val alert = new Alert(AlertType.Information) {
+      title = _title
+      headerText = _header
+      contentText = _content
+    }
+    alert.showAndWait()
+  }
+
+  def showInformation(_title: String, _header: String, _content: String): Unit = {
+    val alert = new Alert(AlertType.Information) {
+      title = _title
+      headerText = _header
+      contentText = _content
+    }
+    alert.showAndWait()
   }
 }
