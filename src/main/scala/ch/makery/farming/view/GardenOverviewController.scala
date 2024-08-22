@@ -2,30 +2,24 @@ package ch.makery.farming.view
 
 import ch.makery.farming.MainApp
 import ch.makery.farming.model.items.PlayerState
-import javafx.fxml.FXML
-import javafx.scene.control.{Alert, Button, Label}
-import javafx.scene.layout.GridPane
+import scalafx.event.ActionEvent
 import scalafx.scene.control.Alert.AlertType
-import javafx.event.ActionEvent
+import scalafx.scene.control.{Alert, Button, Label}
+import scalafx.scene.layout.GridPane
 import scalafxml.core.macros.sfxml
+import scalafx.Includes._
 
 @sfxml
 class GardenOverviewController(
-                                @FXML private var gardenGrid: GridPane,
-                                @FXML private var coinsLabel: Label,
-                                @FXML private var totalharvestplantLabel: Label ) {
+  private var gardenGrid: GridPane,
+  private var coinsLabel: Label,
+  private var totalharvestplantLabel: Label) {
 
-  private val playerState = new PlayerState()
+  private var playerState = new PlayerState()
 
-  @FXML
-  def initialize(): Unit = {
-    for (i <- 0 until 9) {
-      val button = new Button()
-      button.setOnAction(_ => handlePlantClick(new ActionEvent(button, button)))
-      gardenGrid.add(button, i % 3, i / 3)
-    }
-    updateUI()
-  }
+  coinsLabel.setText("Coins: " + playerState.getCoins())
+  totalharvestplantLabel.setText("Total Harvested Plants: " + playerState.getTotalHarvestedPlants())
+
 
   def returnHome(): Unit = {
     MainApp.showWelcome()
@@ -39,28 +33,24 @@ class GardenOverviewController(
     MainApp.showInventory()
   }
 
-  def updateUI(): Unit = {
-    coinsLabel.setText("Coins: " + playerState.getCoins())
-    totalharvestplantLabel.setText("Total Harvested Plants: " + playerState.getTotalHarvestedPlants())
-  }
-
   def handlePlantClick(event: ActionEvent): Unit = {
-    val button = event.getSource.asInstanceOf[Button]
-    val plotIndex = gardenGrid.getChildren.indexOf(button)
+    val clickedButton = event.source.asInstanceOf[javafx.scene.control.Button]
+    val plotIndex = clickedButton.id.value.stripPrefix("Grid").toInt
 
     if (playerState.isOccupied(plotIndex)) {
       showOccupiedMessage()
     } else {
       MainApp.showPlantCrop(plotIndex)
     }
-    updateUI()
   }
 
   private def showOccupiedMessage(): Unit = {
-    val alert = new Alert(AlertType.Information)
-    alert.setTitle("Plot Occupied")
-    alert.setHeaderText(null)
-    alert.setContentText("This plot is already occupied.")
+    val alert = new Alert(AlertType.Information){
+    title = "Plot Occupied"
+    headerText = "Plot Occupied"
+    contentText = "This plot is already occupied. Please choose another plot"
+    }
     alert.showAndWait()
   }
 }
+

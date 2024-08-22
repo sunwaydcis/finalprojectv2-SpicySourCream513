@@ -87,7 +87,7 @@ object MainApp extends JFXApp {
     if (resource == null) {
       throw new RuntimeException("PlantCrop.fxml not found")
     }
-    val loader = new FXMLLoader(resource, NoDependencyResolver) // NoDependencyResolver is fine here
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load()
     val root = loader.getRoot[jfxs.layout.AnchorPane]
     val stage = new Stage(StageStyle.DECORATED)

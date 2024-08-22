@@ -1,46 +1,38 @@
 package ch.makery.farming.view
 
-import javafx.fxml.FXML
 import ch.makery.farming.model.crops.{Carrot, Corn, Strawberry, Watermelon, Wheat}
 import ch.makery.farming.model.items.PlayerState
-import javafx.scene.control.{Alert, ButtonType, Label, TextField}
-import javafx.scene.image.ImageView
 import scalafx.scene.control.Alert.AlertType
+import scalafx.scene.control.{Alert, Label, TextField}
 import scalafxml.core.macros.sfxml
 
 @sfxml
-class ShopController {
+class ShopController (
   //Wheat
-  @FXML private var wheatGrowthtime: Label = _
-  @FXML private var wheatCost: Label = _
-  @FXML private var wheatQuantity: TextField = _
+  private var wheatGrowthtime: Label,
+  private var wheatCost: Label,
+  private var wheatQuantity: TextField,
 
   //Corn
-  @FXML private var cornGrowthtime: Label = _
-  @FXML private var cornCost: Label = _
-  @FXML private var cornQuantity: TextField = _
+  private var cornGrowthtime: Label,
+  private var cornCost: Label,
+  private var cornQuantity: TextField,
 
   //Carrot
-  @FXML private var carrotGrowthtime: Label = _
-  @FXML private var carrotCost: Label = _
-  @FXML private var carrotQuantity: TextField = _
+  private var carrotGrowthtime: Label,
+  private var carrotCost: Label,
+  private var carrotQuantity: TextField,
 
   //Strawberry
-  @FXML private var strawberryGrowthtime: Label = _
-  @FXML private var strawberryCost: Label = _
-  @FXML private var strawberryQuantity: TextField = _
+  private var strawberryGrowthtime: Label,
+  private var strawberryCost: Label,
+  private var strawberryQuantity: TextField,
 
   //Watermelon
-  @FXML private var watermelonGrowthtime: Label = _
-  @FXML private var watermelonCost: Label = _
-  @FXML private var watermelonQuantity: TextField = _
+  private var watermelonGrowthtime: Label,
+  private var watermelonCost: Label,
+  private var watermelonQuantity: TextField){
 
-  //Images
-  @FXML private var wheatImage: ImageView = _
-  @FXML private var cornImage: ImageView = _
-  @FXML private var strawberryImage: ImageView = _
-  @FXML private var watermelonImage: ImageView = _
-  @FXML private var carrotImage: ImageView = _
 
   private var playerState: PlayerState = _
 
@@ -51,23 +43,14 @@ class ShopController {
   private val strawberry = new Strawberry()
   private val watermelon = new Watermelon()
 
-  @FXML
-  private def initialize(): Unit = {
+
     wheatGrowthtime.setText(s"Growthtime: ${wheat.getGrowthTime}")
     cornGrowthtime.setText(s"Growthtime: ${corn.getGrowthTime}")
     carrotGrowthtime.setText(s"Growthtime: ${carrot.getGrowthTime}")
     strawberryGrowthtime.setText(s"Growthtime: ${strawberry.getGrowthTime}")
     watermelonGrowthtime.setText(s"Growthtime: ${watermelon.getGrowthTime}")
 
-    // Set images for crops (assuming image paths are correct)
-    wheatImage.setImage(new javafx.scene.image.Image("resources/wheat.png"))
-    cornImage.setImage(new javafx.scene.image.Image("resources/corn.png"))
-    carrotImage.setImage(new javafx.scene.image.Image("resources/carrot.png"))
-    strawberryImage.setImage(new javafx.scene.image.Image("resources/strawberry.png"))
-    watermelonImage.setImage(new javafx.scene.image.Image("resources/watermelon.png"))
-  }
 
-  @FXML
   def handleBuyButton(): Unit = {
     try {
       // Read quantities from text fields
@@ -76,12 +59,6 @@ class ShopController {
       val carrotQuantityValue = validateQuantity(carrotQuantity, "Carrot")
       val strawberryQuantityValue = validateQuantity(strawberryQuantity, "Strawberry")
       val watermelonQuantityValue = validateQuantity(watermelonQuantity, "Watermelon")
-
-      if (wheatQuantityValue == 0 && cornQuantityValue == 0 && carrotQuantityValue == 0 &&
-        strawberryQuantityValue == 0 && watermelonQuantityValue == 0) {
-        showAlert(AlertType.Warning, "Input Error", "No input quantity", "Please enter quantities for crops you want to purchase.")
-        return
-      }
 
       // Calculate total cost
       val totalCost = wheatQuantityValue * wheat.getCost +
@@ -93,7 +70,9 @@ class ShopController {
       // Check if player has enough coins
       if (playerState.coins >= totalCost) {
         // Confirm purchase
-        val confirmation = new Alert(AlertType.Confirmation)
+        showConfirmation("Confirm Purchase", "Are you sure you want to make this purchase?", s"Total cost: $totalCost coins"): Unit = {
+
+          val confirmation = new Alert(AlertType.Confirmation)
         confirmation.setTitle("Confirm Purchase")
         confirmation.setHeaderText("Are you sure you want to make this purchase?")
         confirmation.setContentText(s"Total cost: $totalCost coins")
@@ -127,7 +106,7 @@ class ShopController {
     }
   }
 
-  private def validateQuantity(quantityField: TextField, cropName: String): Int = {
+  def validateQuantity(quantityField: TextField, cropName: String): Int = {
     if (quantityField.getText == null || quantityField.getText.trim.isEmpty) {
       return 0
     }
@@ -140,11 +119,21 @@ class ShopController {
     }
   }
 
-  private def showAlert(alertType: AlertType, title: String, headerText: String, contentText: String): Unit = {
-    val alert = new Alert(alertType)
-    alert.setTitle(title)
-    alert.setHeaderText(headerText)
-    alert.setContentText(contentText)
+  def showAlert(_title: String, _header: String, _content: String): Unit = {
+    val alert = new Alert(AlertType.Information) {
+      title = _title
+      headerText =  _header
+      contentText = _content
+    }
+    alert.showAndWait()
+  }
+
+  def showConfirmation(_title: String, _header: String, _content: String): Unit = {
+    val alert = new Alert(AlertType.Confirmation) {
+      title = _title
+      headerText =  _header
+      contentText = _content
+    }
     alert.showAndWait()
   }
 }

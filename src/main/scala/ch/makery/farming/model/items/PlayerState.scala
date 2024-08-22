@@ -1,10 +1,13 @@
 package ch.makery.farming.model.items
 
+import scalafx.scene.control.Alert
+import scalafx.scene.control.Alert.AlertType
+
 class PlayerState(var coins: Double = 100,
                   var totalHarvestedPlants: Int = 0) {
 
   // Array to track occupied plots
-  var plotStatus: Array[Boolean] = Array.fill(9)(false)
+  private var plotStatus: Array[Boolean] = Array.fill(9)(false)
 
   def isOccupied(plotIndex: Int): Boolean = {
     plotStatus(plotIndex)
@@ -19,16 +22,11 @@ class PlayerState(var coins: Double = 100,
   }
 
   // Method to deduct coins, e.g., when removing a crop
-  def deductCoins(amount: Double): Boolean = {
-    if (coins >= amount) {
+  def deductCoins(amount: Double): Unit = {
       coins -= amount
-      true
-    } else {
-      false
     }
-  }
 
-  // Method to add coins, e.g., when selling a crop
+    // Method to add coins, e.g., when selling a crop
   def addCoins(amount: Double): Unit = {
     coins += amount
   }
@@ -46,6 +44,12 @@ class PlayerState(var coins: Double = 100,
     totalHarvestedPlants
   }
 
-
-
+  def showNotEnoughCoinMessage(): Unit = {
+    val alert = new Alert(AlertType.Information) {
+      title = "Not Enough Coins"
+      headerText = "Insufficient Funds"
+      contentText = "You don't have enough coins. Please earn more coins by selling your harvested plant"
+    }
+    alert.showAndWait()
+  }
 }

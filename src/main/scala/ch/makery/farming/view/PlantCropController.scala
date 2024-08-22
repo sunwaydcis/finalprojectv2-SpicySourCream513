@@ -1,8 +1,9 @@
 package ch.makery.farming.view
 
-import scalafx.scene.control.{Alert, ButtonType, ChoiceBox, Label}
+import scalafx.scene.control.{Alert, ChoiceBox, Label}
 import ch.makery.farming.model.crops.{Carrot, Corn, Crop, Strawberry, Watermelon, Wheat}
 import ch.makery.farming.model.items.PlayerState
+
 import scalafx.scene.control.Alert.AlertType
 import scalafxml.core.macros.sfxml
 import scalafx.Includes._
@@ -11,6 +12,7 @@ import scalafx.collections.ObservableBuffer
 
 @sfxml
 class PlantCropController (
+  private var plotIndex: Int,
   private var cropChoicebox: ChoiceBox[String],
   private var seedsLabel: Label,
   private var descriptionLabel: Label) {
@@ -19,8 +21,7 @@ class PlantCropController (
   private var selectedCrop: Crop = _
   private var currentPlantedCrop: Crop = _
 
-    cropChoicebox.items = ObservableBuffer("Carrot", "Corn", "Strawberry", "Watermelon", "Wheat")
-
+  cropChoicebox.items = ObservableBuffer("Carrot", "Corn", "Strawberry", "Watermelon", "Wheat")
     cropChoicebox.setOnAction(_ => updateCropDetails())
 
   def updateCropDetails(): Unit = {
@@ -40,49 +41,54 @@ class PlantCropController (
     }
   }
 
-
   def handlePlantClick(): Unit = {
     if (selectedCrop == null) {
       showAlert("Error", "No crop selected", "Please select a crop to plant.")
       return
     }
 
-    if (selectedCrop.getAvailableSeeds <= 0) {
-      showAlert("Error", "Not enough seeds", "You do not have enough seeds to plant this crop. Please check your intentory")
+    if (selectedCrop.getAvailableSeeds < 1) {
+      showAlert("Error", "Not enough seeds", "You do not have enough seeds to plant this crop. Please check your inventory.")
       return
     }
 
-    if (currentPlantedCrop != null) {
-      showAlert("Error", "Plot Occupied", "There is already a crop planted in this plot.")
+    if (playerState.isOccupied(plotIndex)) {
+      showAlert("Error", "Plot Occupied", "This plot is already occupied. Please choose another plot.")
       return
     }
 
     // Plant the crop
-    if (selectedCrop.deductSeedsAvailable(1)) {
-      playerState.occupyPlot(0) // Assume plot index 0 for simplicity, adapt as necessary
-      currentPlantedCrop = selectedCrop
-      showAlert("Success", "Crop Planted", s"${selectedCrop.getName} has been successfully planted.")
-    }
+    selectedCrop.deductSeedsAvailable(1)
+    playerState.occupyPlot(plotIndex)
+    currentPlantedCrop = selectedCrop
+    showAlert("Success", "Crop Planted", s"${selectedCrop.getName} has been successfully planted in plot $plotIndex.")
   }
 
 
-  def handleRemovePlantClick(): Unit = {
+  def handleRemovePlantClick(plotIndex: Int): Unit = {
     if (currentPlantedCrop == null) {
       showAlert("Error", "No Plant to Remove", "There is no plant to remove from this plot.")
       return
     }
 
-    // Remove the crop
-    playerState.unoccupyPlot(0) // Assume plot index 0 for simplicity
+    if (playerState.coins < 10) {
+      playerState.showNotEnoughCoinMessage()
+      return
+    }
+
+    //delete the crop
+    playerState.deductCoins(10)
+    currentPlantedCrop.removeCrop(playerState, plotIndex)
     currentPlantedCrop = null
-    showAlert("Success", "Crop Removed", "The crop has been successfully removed.")
+    showAlert("Success", "Crop Removed", s"The crop has been removed from plot $plotIndex, costing 10 coins.")
   }
 
-  private def showAlert(_title: String, _header: String, content: String): Unit = {
+
+  private def showAlert(_title: String, _header: String, _content: String): Unit = {
     val alert = new Alert(AlertType.Information) {
       title = _title
       headerText =  _header
-      contentText = content
+      contentText = _content
     }
     alert.showAndWait()
   }
