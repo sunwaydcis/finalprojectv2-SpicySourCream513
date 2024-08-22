@@ -5,13 +5,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="357.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="357.0" style="-fx-background-color: lightgreen;" styleClass="background2" stylesheets="@FarmGame.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="109.0" layoutY="37.0" text="Instruction">
          <font>
             <Font name="Franklin Gothic Heavy" size="27.0" />
          </font>
       </Label>
-      <Text layoutX="36.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click on an empty plot to plant seeds from your inventory.Wait for crops to grow and click on them to harvest.Earn coins by selling harvested crops in your inventory.Keep an eye on your total harvested plants and coin balance as you manage your garden!" wrappingWidth="292.80340576171875" />
+      <Text layoutX="33.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1) Click on an empty plot to plant seeds from your inventory." wrappingWidth="292.80340576171875" />
+      <Text layoutX="33.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2) Wait for crops to grow and click on them to harvest." wrappingWidth="292.80340576171875" />
+      <Text layoutX="32.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Keep an eye on your total harvested plants and coin balance as you manage your garden!" textAlignment="CENTER" wrappingWidth="292.80340576171875" />
+      <Text layoutX="33.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3) Earn coins by selling harvested crops in your inventory." wrappingWidth="292.80340576171875" />
    </children>
 </AnchorPane>
