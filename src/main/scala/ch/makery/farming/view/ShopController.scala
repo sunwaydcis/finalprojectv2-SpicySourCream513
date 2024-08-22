@@ -3,7 +3,8 @@ package ch.makery.farming.view
 import ch.makery.farming.model.crops.{Carrot, Corn, Strawberry, Watermelon, Wheat}
 import ch.makery.farming.model.items.PlayerState
 import scalafx.scene.control.Alert.AlertType
-import scalafx.scene.control.{Alert, Label, TextField}
+import scalafx.scene.control.{Alert, ButtonType, Label, TextField}
+import scalafx.stage.Stage
 import scalafxml.core.macros.sfxml
 
 @sfxml
@@ -69,53 +70,56 @@ class ShopController (
 
       // Check if player has enough coins
       if (playerState.coins >= totalCost) {
-        // Confirm purchase
-        showConfirmation("Confirm Purchase", "Are you sure you want to make this purchase?", s"Total cost: $totalCost coins"): Unit = {
-
-          val confirmation = new Alert(AlertType.Confirmation)
-        confirmation.setTitle("Confirm Purchase")
-        confirmation.setHeaderText("Are you sure you want to make this purchase?")
-        confirmation.setContentText(s"Total cost: $totalCost coins")
-        val result = confirmation.showAndWait()
-
-        if (result.isPresent && result.get == ButtonType.OK) {
-          playerState.coins -= totalCost
-
-          // Deduct seeds from store
-          val successfulWheat = wheat.deductSeedsAvailable(wheatQuantityValue)
-          val successfulCorn = corn.deductSeedsAvailable(cornQuantityValue)
-          val successfulCarrot = carrot.deductSeedsAvailable(carrotQuantityValue)
-          val successfulStrawberry = strawberry.deductSeedsAvailable(strawberryQuantityValue)
-          val successfulWatermelon = watermelon.deductSeedsAvailable(watermelonQuantityValue)
-
-          if (successfulWheat && successfulCorn && successfulCarrot &&
-            successfulStrawberry && successfulWatermelon) {
-            showAlert(AlertType.Information, "Purchase Successful", "Congratulations!", "Your purchase was successful!")
-          } else {
-            showAlert(AlertType.Error, "Purchase Failed", "Insufficient Seeds", "Not enough seeds available in the store.")
-          }
-        } else {
-          initialize() // User canceled the purchase, reinitialize the shop
+        // Confirm purchase //show confirm message
+        val alert = new Alert(AlertType.Confirmation) {
+          title = "Confirm Purchase"
+          headerText = "Are you sure you want to make this purchase?"
+          contentText = s"Total cost: $$$totalCost coins"
         }
-      } else {
-        showAlert(AlertType.Error, "Purchase Failed", "Not Enough Coins", "You don't have enough coins to complete this purchase.")
+        val result = alert.showAndWait()
+
+        result match {
+          case Some(ButtonType.OK) =>
+            playerState.coins -= totalCost
+            wheat.addSeedsAvailable(wheatQuantityValue)
+            corn.addSeedsAvailable(cornQuantityValue)
+            carrot.addSeedsAvailable(carrotQuantityValue)
+            strawberry.addSeedsAvailable(strawberryQuantityValue)
+            watermelon.addSeedsAvailable(watermelonQuantityValue)
+
+            showInformation("Purchase Successful", "Congratulations!", "Your purchase was successful!")
+
+            val stage = wheatQuantity.getScene.getWindow.asInstanceOf[Stage]
+            stage.close()
+
+          case _ =>
+            val stage = wheatQuantity.getScene.getWindow.asInstanceOf[Stage]
+            stage.close()
+        }
       }
+      showAlert("Purchase Failed", "Insufficient Seeds", "Not enough coins to complete this purchase.")
+
+
     } catch {
       case e: NumberFormatException =>
-        showAlert(AlertType.Error, "Input Error", "Invalid input", "Please enter valid integer quantities for all crops.")
+        showAlert("Input Error", "Invalid input", "Please enter valid integer quantities for all crops.")
     }
   }
 
   def validateQuantity(quantityField: TextField, cropName: String): Int = {
-    if (quantityField.getText == null || quantityField.getText.trim.isEmpty) {
-      return 0
-    }
     try {
-      quantityField.getText.toInt
+      val quantityStr = quantityField.text.value.trim
+      val quantity = quantityStr.toInt
+      if (quantity < 0) {
+        throw new NumberFormatException(s"$cropName quantity cannot be negative.")
+      }
+      quantity
+
     } catch {
       case _: NumberFormatException =>
-        showAlert(AlertType.Error, "Invalid Input", s"Invalid input for $cropName", "Only integer values are allowed.")
-        throw new NumberFormatException() // Re-throw to be caught by the outer try-catch
+        showAlert("Input Error", s"Invalid quantity for $cropName", s"Please enter a valid non-negative integer for $cropName.")
+
+        throw new NumberFormatException(s"Invalid quantity entered for $cropName.")
     }
   }
 
@@ -128,8 +132,8 @@ class ShopController (
     alert.showAndWait()
   }
 
-  def showConfirmation(_title: String, _header: String, _content: String): Unit = {
-    val alert = new Alert(AlertType.Confirmation) {
+  def showInformation(_title: String, _header: String, _content: String): Unit = {
+    val alert = new Alert(AlertType.Information) {
       title = _title
       headerText =  _header
       contentText = _content
