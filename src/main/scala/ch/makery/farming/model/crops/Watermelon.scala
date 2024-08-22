@@ -11,8 +11,7 @@ class Watermelon( _name: String = "Watermelon",
 
   override def getDescription: String = {
     val profit = _sellPrice - _cost
-    s" Watermelons are large, refreshing fruits perfect for hot days." +
-      s"Growth Time: ${_growthTimeInSeconds} seconds, Cost: $$${_cost}, " +
-      s"Sell Price: $$${_sellPrice}, Profit: $$${profit}."
+    s" Watermelons are large, refreshing fruits perfect for hot days.\n" +
+      s"Growth Time: ${_growthTimeInSeconds} seconds\nCost: $$${_cost}\nSell Price: $$${_sellPrice}, Profit: $$${profit}."
   }
 }

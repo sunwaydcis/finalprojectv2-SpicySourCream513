@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="318.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.farming.view.PlantCropController">
    <children>
@@ -14,9 +15,9 @@
          </font>
       </Label>
       <Label fx:id="seedsLabel" layoutX="224.0" layoutY="134.0" text="You have 5 seeds for this plant" />
-      <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="166.0" prefHeight="17.0" prefWidth="619.0" text="Plant description" textAlignment="CENTER" />
       <Button layoutX="230.0" layoutY="238.0" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" />
       <Button layoutX="317.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleRemovePlantClick" text="Remove Plant" />
       <ChoiceBox fx:id="cropChoicebox" layoutX="149.0" layoutY="95.0" prefHeight="25.0" prefWidth="376.0" />
+      <Text fx:id="descriptionLabel" layoutX="27.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plant Description" textAlignment="CENTER" wrappingWidth="556.7955322265625" />
    </children>
 </AnchorPane>

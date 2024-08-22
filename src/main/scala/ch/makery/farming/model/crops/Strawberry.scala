@@ -11,8 +11,7 @@ class Strawberry( _name: String = "Strawberry",
 
   override def getDescription: String = {
     val profit = _sellPrice - _cost
-    s" Strawberries are a sweet fruit often used in desserts." +
-      s"Growth Time: ${_growthTimeInSeconds} seconds, Cost: $$${_cost}, " +
-      s"Sell Price: $$${_sellPrice}, Profit: $$${profit}."
+    s" Strawberries are a sweet fruit often used in desserts.\n" +
+      s"Growth Time: ${_growthTimeInSeconds} seconds\nCost: $$${_cost}\nSell Price: $$${_sellPrice}, Profit: $$${profit}."
   }
 }

@@ -11,8 +11,7 @@ class Wheat( _name: String = "Wheat",
 
   override def getDescription: String = {
     val profit = _sellPrice - _cost
-    s" Wheat is a staple crop used to produce bread and other products. " +
-      s"Growth Time: ${_growthTimeInSeconds} seconds, Cost: $$${_cost}, " +
-      s"Sell Price: $$${_sellPrice}, Profit: $$${profit}."
+    " Wheat is a staple crop used to produce bread and other products.\n" +
+      s"Growth Time: ${_growthTimeInSeconds} seconds\nCost: $$${_cost}\nSell Price: $$${_sellPrice}, Profit: $$${profit}."
   }
 }

@@ -6,13 +6,14 @@ import ch.makery.farming.model.items.PlayerState
 import scalafx.scene.control.Alert.AlertType
 import scalafxml.core.macros.sfxml
 import scalafx.collections.ObservableBuffer
+import scalafx.scene.text.Text
 
 @sfxml
 class PlantCropController (
   private val plotIndex: Int,
   private var cropChoicebox: ChoiceBox[String],
   private var seedsLabel: Label,
-  private var descriptionLabel: Label) {
+  private var descriptionLabel: Text) {
 
   private var playerState: PlayerState = new PlayerState()
   private var selectedCrop: Crop = _

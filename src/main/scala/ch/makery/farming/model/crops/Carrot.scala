@@ -11,8 +11,7 @@ class Carrot( _name: String = "Carrot",
 
   override def getDescription: String = {
     val profit = _sellPrice - _cost
-    s" Carrots are rich in nutrients and can be used in a variety of dishes. " +
-      s"Growth Time: ${_growthTimeInSeconds} seconds, Cost: $$${_cost}, " +
-      s"Sell Price: $$${_sellPrice}, Profit: $$${profit}."
+    s" Carrots are rich in nutrients and can be used in a variety of dishes.\n" +
+      s"Growth Time: ${_growthTimeInSeconds} seconds\nCost: $$${_cost}\nSell Price: $$${_sellPrice}, Profit: $$${profit}."
   }
 }

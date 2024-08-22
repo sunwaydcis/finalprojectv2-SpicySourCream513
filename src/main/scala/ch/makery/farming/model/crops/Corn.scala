@@ -11,8 +11,7 @@ class Corn( _name: String = "Corn",
 
   override def getDescription: String = {
     val profit = _sellPrice - _cost
-    s" Corn is a versatile crop that grows tall and is used in many foods. " +
-      s"Growth Time: ${_growthTimeInSeconds} seconds, Cost: $$${_cost}, " +
-      s"Sell Price: $$${_sellPrice}, Profit: $$${profit}."
+    s" Corn is a versatile crop that grows tall and is used in many foods. \n" +
+      s"Growth Time: ${_growthTimeInSeconds} seconds\nCost: $$${_cost}\nSell Price: $$${_sellPrice}, Profit: $$${profit}."
   }
 }
