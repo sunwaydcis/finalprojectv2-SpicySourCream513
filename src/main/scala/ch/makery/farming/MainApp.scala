@@ -1,6 +1,6 @@
 package ch.makery.farming
 
-import ch.makery.farming.view.GardenOverviewController
+import ch.makery.farming.view.{GardenOverviewController, PlantCropController}
 import javafx.{scene => jfxs}
 import scalafx.Includes._
 import scalafx.application.JFXApp
@@ -84,9 +84,13 @@ object MainApp extends JFXApp {
 
   def showPlantCrop(plotIndex: Int): Unit = {
     val resource = getClass.getResource("view/PlantCrop.fxml")
+    if (resource == null) {
+      throw new RuntimeException("PlantCrop.fxml not found")
+    }
     val loader = new FXMLLoader(resource, NoDependencyResolver) // NoDependencyResolver is fine here
     loader.load()
     val root = loader.getRoot[jfxs.layout.AnchorPane]
+
     val stage = new Stage(StageStyle.DECORATED)
     stage.setTitle(s"Plant a Crop - Plot $plotIndex")
     stage.setScene(new jfxs.Scene(root))

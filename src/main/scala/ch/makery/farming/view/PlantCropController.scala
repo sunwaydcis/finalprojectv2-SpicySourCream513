@@ -10,7 +10,7 @@ import scalafxml.core.macros.sfxml
 import javafx.collections.FXCollections
 
 @sfxml
-class PlantCropController{
+class PlantCropController {
 
   @FXML private var cropChoicebox: ChoiceBox[String] = _
   @FXML private var seedsLabel: Label = _
@@ -21,22 +21,24 @@ class PlantCropController{
   private var currentPlantedCrop: Crop = _
 
 
+    if (cropChoicebox != null) {
+      cropChoicebox.setItems(FXCollections.observableArrayList("Carrot", "Corn", "Strawberry", "Watermelon", "Wheat"))
+      cropChoicebox.setValue("Select Crop")
+
+      cropChoicebox.setOnAction(_ => updateCropDetails())
+    }
+
+
   @FXML
-  def initialize(): Unit = {
-    cropChoicebox.setItems(FXCollections.observableArrayList("Carrot", "Corn", "Strawberry", "Watermelon", "Wheat"))
-    cropChoicebox.setValue("Select Crop")
-
-    cropChoicebox.setOnAction(_ => updateCropDetails())
-  }
-
   def updateCropDetails(): Unit = {
     val cropName = cropChoicebox.getValue
     selectedCrop = cropName match {
-      case "Carrot" => new Carrot(seedsAvailable = 5)
-      case "Wheat" => new Carrot(seedsAvailable = 5)
-      case "Strawberry" => new Carrot(seedsAvailable = 2)
-      case "Corn" => new Carrot(seedsAvailable = 3)
-      case "Watermelon" => new Carrot(seedsAvailable = 1)
+      case "Carrot" => new Carrot()
+      case "Wheat" => new Wheat()
+      case "Strawberry" => new Strawberry()
+      case "Corn" => new Corn()
+      case "Watermelon" => new Watermelon()
+      case _ => null
     }
 
     if (selectedCrop != null) {

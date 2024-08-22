@@ -4,7 +4,7 @@ class Carrot(
               _growthTimeInSeconds: Int = 30,
               cost: Double = 20.0,
               sellPrice: Double = 28.0,
-              seedsAvailable: Int = 0,
+              seedsAvailable: Int = 2,
               harvestedCrops: Int = 0
             ) extends Crop("Carrot", _growthTimeInSeconds, cost, sellPrice, seedsAvailable, isMature = false, harvestedCrops) {
 
