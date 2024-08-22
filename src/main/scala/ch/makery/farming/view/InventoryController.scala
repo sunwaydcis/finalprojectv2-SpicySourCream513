@@ -43,9 +43,7 @@ class InventoryController(
   private val strawberry = new Strawberry()
   private val watermelon = new Watermelon()
 
-
-  def updateCropDetails(): Unit = {
-    wheatSeedAvailable.setText(s"Seed: ${wheat.getAvailableSeeds}")
+   wheatSeedAvailable.setText(s"Seed: ${wheat.getAvailableSeeds}")
     wheatSellPrice.setText(s"Sell Price: ${wheat.getSellPrice} coins")
     wheatHarvest.setText(s"Harvest: ${wheat.getHarvestedCrops}")
 
@@ -64,8 +62,6 @@ class InventoryController(
     watermelonSeedAvailable.setText(s"Seed: ${watermelon.getAvailableSeeds}")
     watermelonSellPrice.setText(s"Sell Price: ${watermelon.getSellPrice} coins")
     watermelonHarvest.setText(s"Harvest: ${watermelon.getHarvestedCrops}")
-  }
-
 
   def handleSellButton(): Unit = {
     try {

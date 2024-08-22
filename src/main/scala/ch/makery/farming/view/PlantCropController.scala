@@ -3,16 +3,13 @@ package ch.makery.farming.view
 import scalafx.scene.control.{Alert, ChoiceBox, Label}
 import ch.makery.farming.model.crops.{Carrot, Corn, Crop, Strawberry, Watermelon, Wheat}
 import ch.makery.farming.model.items.PlayerState
-
 import scalafx.scene.control.Alert.AlertType
 import scalafxml.core.macros.sfxml
-import scalafx.Includes._
-
 import scalafx.collections.ObservableBuffer
 
 @sfxml
 class PlantCropController (
-  private var plotIndex: Int,
+  private val plotIndex: Int,
   private var cropChoicebox: ChoiceBox[String],
   private var seedsLabel: Label,
   private var descriptionLabel: Label) {
@@ -22,7 +19,8 @@ class PlantCropController (
   private var currentPlantedCrop: Crop = _
 
   cropChoicebox.items = ObservableBuffer("Carrot", "Corn", "Strawberry", "Watermelon", "Wheat")
-    cropChoicebox.setOnAction(_ => updateCropDetails())
+  cropChoicebox.setOnAction(_ => updateCropDetails())
+
 
   def updateCropDetails(): Unit = {
     val cropName = cropChoicebox.getValue
@@ -65,7 +63,7 @@ class PlantCropController (
   }
 
 
-  def handleRemovePlantClick(plotIndex: Int): Unit = {
+  def handleRemovePlantClick() : Unit = {
     if (currentPlantedCrop == null) {
       showAlert("Error", "No Plant to Remove", "There is no plant to remove from this plot.")
       return

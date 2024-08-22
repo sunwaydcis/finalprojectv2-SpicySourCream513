@@ -35,56 +35,56 @@
          <children>
             <Pane prefHeight="106.0" prefWidth="109.0" GridPane.rowIndex="1">
                <children>
-                  <Label layoutX="23.0" layoutY="14.0" text="Wheat">
+                  <Label layoutX="32.0" layoutY="14.0" text="Wheat">
                      <font>
                         <Font name="Franklin Gothic Demi" size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="wheatSeedAvailable" layoutX="10.0" layoutY="42.0" text="Seed" />
+                  <Label fx:id="wheatSeedAvailable" alignment="CENTER" layoutX="-8.0" layoutY="42.0" prefHeight="17.0" prefWidth="106.0" text="Seed" />
                   <Label fx:id="wheatSellPrice" layoutX="12.0" layoutY="89.0" text="Sell Price: " />
                   <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
                   <TextField fx:id="wheatQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
-                  <Label fx:id="wheatHarvest" layoutX="13.0" layoutY="65.0" text="Harvest:" />
+                  <Label fx:id="wheatHarvest" alignment="CENTER" layoutX="12.0" layoutY="59.0" prefHeight="17.0" prefWidth="105.0" text="Harvest:" />
                </children>
             </Pane>
             <Pane prefHeight="185.0" prefWidth="88.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label layoutX="31.0" layoutY="14.0" text="Corn" />
-                  <Label fx:id="cornSeedAvailable" layoutX="13.0" layoutY="51.0" text="Seed" />
-                  <Label fx:id="cornSellPrice" layoutX="27.0" layoutY="80.0" text="Sell Price: " />
+                  <Label alignment="CENTER" layoutX="-2.0" layoutY="14.0" prefHeight="17.0" prefWidth="105.0" text="Corn" />
+                  <Label fx:id="cornSeedAvailable" alignment="CENTER" layoutX="-2.0" layoutY="43.0" prefHeight="17.0" prefWidth="105.0" text="Seed" />
+                  <Label fx:id="cornSellPrice" layoutX="18.0" layoutY="89.0" text="Sell Price: " />
                   <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
                   <TextField fx:id="cornQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
-                  <Label fx:id="cornHarvest" layoutX="17.0" layoutY="65.0" text="Harvest:" />
+                  <Label fx:id="cornHarvest" alignment="CENTER" layoutX="-2.0" layoutY="60.0" prefHeight="17.0" prefWidth="105.0" text="Harvest:" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <Label layoutX="28.0" layoutY="14.0" text="Carrot" />
-                  <Label fx:id="carrotSeedAvailable" layoutX="5.0" layoutY="51.0" text="Seed" />
-                  <Label fx:id="carrotSellPrice" layoutX="27.0" layoutY="80.0" prefHeight="17.0" prefWidth="63.0" text="Sell Price: " />
+                  <Label alignment="CENTER" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" text="Carrot" />
+                  <Label fx:id="carrotSeedAvailable" alignment="CENTER" layoutY="40.0" prefHeight="17.0" prefWidth="106.0" text="Seed" />
+                  <Label fx:id="carrotSellPrice" layoutX="13.0" layoutY="89.0" prefHeight="17.0" prefWidth="63.0" text="Sell Price: " />
                   <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
                   <TextField fx:id="carrotQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
-                  <Label fx:id="carrotHarvest" layoutX="32.0" layoutY="60.0" text="Harvest:" />
+                  <Label fx:id="carrotHarvest" alignment="CENTER" layoutX="1.0" layoutY="64.0" prefHeight="17.0" prefWidth="105.0" text="Harvest:" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <Label layoutX="18.0" layoutY="14.0" text="Stawberry" />
-                  <Label fx:id="strawberrySeedAvailable" layoutX="14.0" layoutY="48.0" text="Seed" />
-                  <Label fx:id="strawberrySellPrice" layoutX="22.0" layoutY="81.0" prefHeight="17.0" prefWidth="77.0" text="Sell Price: " />
+                  <Label alignment="CENTER" layoutX="-7.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" text="Stawberry" />
+                  <Label fx:id="strawberrySeedAvailable" alignment="CENTER" layoutX="1.0" layoutY="40.0" prefHeight="17.0" prefWidth="105.0" text="Seed" />
+                  <Label fx:id="strawberrySellPrice" layoutX="15.0" layoutY="89.0" prefHeight="17.0" prefWidth="77.0" text="Sell Price: " />
                   <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
                   <TextField fx:id="strawberryQuantity" layoutX="13.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
-                  <Label fx:id="strawberryHarvest" layoutX="14.0" layoutY="66.0" text="Harvest:" />
+                  <Label fx:id="strawberryHarvest" alignment="CENTER" layoutX="1.0" layoutY="64.0" prefHeight="17.0" prefWidth="105.0" text="Harvest:" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <children>
-                  <Label layoutX="12.0" layoutY="14.0" text="Watermelon" />
-                  <Label fx:id="watermelonSeedAvailable" layoutX="13.0" layoutY="48.0" text="Seed" />
-                  <Label fx:id="watermelonSellPrice" layoutX="18.0" layoutY="81.0" prefHeight="17.0" prefWidth="68.0" text="Sell Price: " />
+                  <Label alignment="CENTER" layoutY="14.0" prefHeight="17.0" prefWidth="105.0" text="Watermelon" />
+                  <Label fx:id="watermelonSeedAvailable" alignment="CENTER" layoutX="1.0" layoutY="39.0" prefHeight="17.0" prefWidth="105.0" text="Seed" />
+                  <Label fx:id="watermelonSellPrice" layoutX="11.0" layoutY="89.0" prefHeight="17.0" prefWidth="68.0" text="Sell Price: " />
                   <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
                   <TextField fx:id="watermelonQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
-                  <Label fx:id="watermelonHarvest" layoutX="13.0" layoutY="64.0" text="Harvest:" />
+                  <Label fx:id="watermelonHarvest" alignment="CENTER" layoutY="64.0" prefHeight="17.0" prefWidth="105.0" text="Harvest:" />
                </children>
             </Pane>
             <ImageView fx:id="wheatImage" fitHeight="73.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
