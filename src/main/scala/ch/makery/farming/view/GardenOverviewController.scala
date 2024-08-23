@@ -19,8 +19,6 @@ class GardenOverviewController(
 
   coinsLabel.setText("Coins: " + playerState.getCoins())
   totalharvestplantLabel.setText("Total Harvested Plants: \n" + playerState.getTotalHarvestedPlants())
-
-
   def returnHome(): Unit = {
     MainApp.showWelcome()
   }

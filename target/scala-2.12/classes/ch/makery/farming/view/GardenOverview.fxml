@@ -26,15 +26,15 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="Grid08" mnemonicParsing="false" onAction="#handlePlantClick" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="Grid01" mnemonicParsing="false" onAction="#handlePlantClick" text="Button" GridPane.columnIndex="1" />
-            <Button fx:id="Grid02" mnemonicParsing="false" onAction="#handlePlantClick" text="Button" GridPane.columnIndex="2" />
-            <Button fx:id="Grid06" mnemonicParsing="false" onAction="#handlePlantClick" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="Grid05" mnemonicParsing="false" onAction="#handlePlantClick" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="Grid04" mnemonicParsing="false" onAction="#handlePlantClick" text="Button" GridPane.rowIndex="1" />
-            <Button fx:id="Grid09" mnemonicParsing="false" onAction="#handlePlantClick" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button fx:id="Grid07" mnemonicParsing="false" onAction="#handlePlantClick" text="Button" GridPane.rowIndex="2" />
-            <Button fx:id="Grid00" mnemonicParsing="false" onAction="#handlePlantClick" text="Button" />
+            <Button fx:id="Grid08" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="Grid01" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" GridPane.columnIndex="1" />
+            <Button fx:id="Grid02" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" GridPane.columnIndex="2" />
+            <Button fx:id="Grid06" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="Grid05" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="Grid04" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" GridPane.rowIndex="1" />
+            <Button fx:id="Grid09" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="Grid07" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" GridPane.rowIndex="2" />
+            <Button fx:id="Grid00" mnemonicParsing="false" onAction="#handlePlantClick" text="Plant" />
          </children>
       </GridPane>
       <Button layoutX="32.0" layoutY="426.0" mnemonicParsing="false" onAction="#returnHome" text="Return Home" />

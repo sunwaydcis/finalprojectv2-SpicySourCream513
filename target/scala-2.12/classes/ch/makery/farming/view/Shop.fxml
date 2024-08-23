@@ -42,48 +42,75 @@
                      </font></Label>
                         <Label fx:id="wheatGrowthtime" alignment="CENTER" layoutY="40.0" prefHeight="49.0" prefWidth="105.0" text="Growthtime" />
                         <Label fx:id="wheatCost" alignment="CENTER" layoutY="89.0" prefHeight="17.0" prefWidth="106.0" text="Cost： $5" />
-                        <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
-                        <TextField fx:id="wheatQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
+                        <Label layoutX="20.0" layoutY="122.0" text="Quantity: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <TextField fx:id="wheatQuantity" layoutX="20.0" layoutY="139.0" prefHeight="25.0" prefWidth="65.0" />
                     </children>
                 </Pane>
                 <!-- Corn Column -->
                 <Pane prefHeight="185.0" prefWidth="88.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <Label layoutX="26.0" layoutY="14.0" text="Corn Seed" />
+                        <Label layoutX="26.0" layoutY="14.0" text="Corn Seed">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font></Label>
                         <Label fx:id="cornGrowthtime" alignment="CENTER" layoutX="1.0" layoutY="39.0" prefHeight="49.0" prefWidth="106.0" text="Growthtime" />
                         <Label fx:id="cornCost" alignment="CENTER" layoutX="1.0" layoutY="89.0" prefHeight="17.0" prefWidth="105.0" text="Cost： $10" />
-                        <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
-                        <TextField fx:id="cornQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
+                        <Label layoutX="14.0" layoutY="122.0" text="Quantity: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <TextField fx:id="cornQuantity" layoutX="14.0" layoutY="139.0" prefHeight="25.0" prefWidth="65.0" />
                     </children>
                 </Pane>
                 <!-- Pumpkin Column -->
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                     <children>
-                        <Label layoutX="20.0" layoutY="14.0" text="Carrot Seed " />
+                        <Label layoutX="13.0" layoutY="14.0" text="Carrot Seed ">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="15.0" />
+                     </font></Label>
                         <Label fx:id="carrotGrowthtime" alignment="CENTER" layoutX="1.0" layoutY="39.0" prefHeight="49.0" prefWidth="105.0" text="Growthtime" />
                         <Label fx:id="carrotCost" alignment="CENTER" layoutX="-1.0" layoutY="89.0" prefHeight="17.0" prefWidth="106.0" text="Cost: $20" />
-                        <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
-                        <TextField fx:id="carrotQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
+                        <Label layoutX="13.0" layoutY="122.0" text="Quantity: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <TextField fx:id="carrotQuantity" layoutX="13.0" layoutY="139.0" prefHeight="25.0" prefWidth="65.0" />
                     </children>
                 </Pane>
                 <!-- Wheat Column -->
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                     <children>
-                        <Label layoutX="10.0" layoutY="14.0" text="Strawberry Seed" />
+                        <Label alignment="CENTER" layoutX="-1.0" layoutY="14.0" prefHeight="16.0" prefWidth="106.0" text="Strawberry Seed">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="14.0" />
+                     </font></Label>
                         <Label fx:id="strawberryGrowthtime" alignment="CENTER" layoutY="38.0" prefHeight="49.0" prefWidth="106.0" text="Growthtime" />
                         <Label fx:id="strawberryCost" alignment="CENTER" layoutX="-7.0" layoutY="89.0" prefHeight="17.0" prefWidth="105.0" text="Cost: $50" />
-                        <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
-                        <TextField fx:id="strawberryQuantity" layoutX="13.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
+                        <Label layoutX="13.0" layoutY="122.0" text="Quantity: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <TextField fx:id="strawberryQuantity" layoutX="13.0" layoutY="139.0" prefHeight="25.0" prefWidth="65.0" />
                     </children>
                 </Pane>
                 <!-- Strawberry Column -->
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                     <children>
-                        <Label layoutX="5.0" layoutY="14.0" text="Watermelon Seed" />
+                        <Label alignment="CENTER" layoutX="-3.0" layoutY="14.0" prefHeight="15.0" prefWidth="106.0" text="Watermelon Seed">
+                     <font>
+                        <Font name="Franklin Gothic Demi" size="13.0" />
+                     </font></Label>
                         <Label fx:id="watermelonGrowthtime" alignment="CENTER" layoutY="39.0" prefHeight="49.0" prefWidth="106.0" text="Growthtime" />
                         <Label fx:id="watermelonCost" alignment="CENTER" layoutX="-8.0" layoutY="89.0" prefHeight="17.0" prefWidth="105.0" text="Cost: $60" />
-                        <Label layoutX="9.0" layoutY="109.0" text="Quantity: " />
-                        <TextField fx:id="watermelonQuantity" layoutX="12.0" layoutY="131.0" prefHeight="25.0" prefWidth="65.0" />
+                        <Label layoutX="12.0" layoutY="122.0" text="Quantity: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <TextField fx:id="watermelonQuantity" layoutX="12.0" layoutY="139.0" prefHeight="25.0" prefWidth="65.0" />
                     </children>
                 </Pane>
                   <ImageView fx:id="wheatImage" fitHeight="73.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
