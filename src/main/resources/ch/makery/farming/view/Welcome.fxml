@@ -11,7 +11,7 @@
       <Button fx:id="Instruction" layoutX="274.0" layoutY="381.0" mnemonicParsing="false" onAction="#getInstruction" text="Instruction" />
       <ImageView fitHeight="319.0" fitWidth="337.0" layoutX="245.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../../Sem6/gamelogo.png" />
+            <Image url="@../../../../Images/gamelogo.png" />
          </image>
       </ImageView>
    </children>
